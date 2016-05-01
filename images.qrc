@@ -1,0 +1,19 @@
+<RCC>
+  <qresource>
+    <file>image/download.png</file>
+    <file>image/add.png</file>
+    <file>image/back.png</file>
+    <file>image/home.png</file>
+    <file>image/gen.png</file>
+    <file>image/remove-disabled.png</file>
+    <file>image/app.png</file>
+    <file>image/remove.png</file>
+    <file>image/icon.png</file>
+    <file>image/book.png</file>
+    <file>image/books.png</file>
+    <file>image/gen.png</file>
+    <file>image/jeu.png</file>
+    <file>image/musique.png</file>
+    <file>image/video.png</file>
+  </qresource>
+</RCC>
