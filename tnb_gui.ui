@@ -253,6 +253,15 @@
       </widget>
       <widget class="QWidget" name="pageMain">
        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
         <property name="bottomMargin">
          <number>9</number>
         </property>
@@ -262,6 +271,9 @@
            <number>0</number>
           </property>
           <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
            <number>0</number>
           </property>
           <property name="rightMargin">
@@ -395,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>4</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -560,7 +572,7 @@ QPushButton:pressed {
                 <item>
                  <widget class="QPushButton" name="audio_removeRows">
                   <property name="enabled">
-                   <bool>true</bool>
+                   <bool>false</bool>
                   </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -4294,7 +4306,7 @@ QPushButton:pressed {
                  <property name="labelAlignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <item row="1" column="0">
+                 <item row="0" column="0">
                   <widget class="QLabel" name="label_2">
                    <property name="font">
                     <font>
@@ -4307,10 +4319,10 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="0" column="1">
                   <widget class="QLineEdit" name="ebook_titre"/>
                  </item>
-                 <item row="2" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="label_12">
                    <property name="font">
                     <font>
@@ -4323,7 +4335,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="1" column="1">
                   <widget class="QComboBox" name="ebook_langue">
                    <property name="currentText">
                     <string/>
@@ -4353,7 +4365,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="3" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_23">
                    <property name="font">
                     <font>
@@ -4366,7 +4378,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
+                 <item row="2" column="1">
                   <widget class="QComboBox" name="ebook_format">
                    <property name="currentText">
                     <string/>
@@ -4446,7 +4458,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="3" column="0">
                   <widget class="QLabel" name="label_24">
                    <property name="font">
                     <font>
@@ -4459,7 +4471,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="3" column="1">
                   <widget class="QSpinBox" name="ebook_pages">
                    <property name="specialValueText">
                     <string> </string>
@@ -4469,72 +4481,72 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="0">
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_25">
                    <property name="text">
                     <string>Genre :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1">
+                 <item row="4" column="1">
                   <widget class="QLineEdit" name="ebook_genre"/>
                  </item>
-                 <item row="6" column="0">
+                 <item row="5" column="0">
                   <widget class="QLabel" name="label_33">
                    <property name="text">
                     <string>Auteur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1">
+                 <item row="5" column="1">
                   <widget class="QLineEdit" name="ebook_auteur"/>
                  </item>
-                 <item row="7" column="0">
+                 <item row="6" column="0">
                   <widget class="QLabel" name="label_35">
                    <property name="text">
                     <string>Éditeur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1">
+                 <item row="6" column="1">
                   <widget class="QLineEdit" name="ebook_editeur"/>
                  </item>
-                 <item row="8" column="0">
+                 <item row="7" column="0">
                   <widget class="QLabel" name="label_26">
                    <property name="text">
                     <string>ISBN-10 :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
+                 <item row="7" column="1">
                   <widget class="QLineEdit" name="ebook_isbn10">
                    <property name="inputMask">
                     <string>9-999-99999-9</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="0">
+                 <item row="8" column="0">
                   <widget class="QLabel" name="label_27">
                    <property name="text">
                     <string>ISBN-13 :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1">
+                 <item row="8" column="1">
                   <widget class="QLineEdit" name="ebook_isbn13">
                    <property name="inputMask">
                     <string>999-9-99999-999-9</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="0">
+                 <item row="9" column="0">
                   <widget class="QLabel" name="label_28">
                    <property name="text">
                     <string>Date de parution :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1">
+                 <item row="9" column="1">
                   <widget class="QDateEdit" name="ebook_date">
                    <property name="specialValueText">
                     <string> </string>
@@ -4551,8 +4563,22 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
+                 <item row="10" column="0">
+                  <widget class="QLabel" name="label_36">
+                   <property name="text">
+                    <string>Taille :</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1">
+                  <widget class="QLineEdit" name="ebook_taille">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="11" column="0">
-                  <widget class="QLabel" name="label_29">
+                  <widget class="QLabel" name="lblDim">
                    <property name="font">
                     <font>
                      <weight>75</weight>
@@ -4566,20 +4592,6 @@ QPushButton:pressed {
                  </item>
                  <item row="11" column="1">
                   <widget class="QLineEdit" name="ebook_dimensions"/>
-                 </item>
-                 <item row="12" column="1">
-                  <widget class="QLineEdit" name="ebook_taille">
-                   <property name="readOnly">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="0">
-                  <widget class="QLabel" name="label_36">
-                   <property name="text">
-                    <string>Taille :</string>
-                   </property>
-                  </widget>
                  </item>
                 </layout>
                </item>
@@ -4734,7 +4746,7 @@ QPushButton:pressed {
                 <item>
                  <widget class="QPushButton" name="ebooks_removeRows">
                   <property name="enabled">
-                   <bool>true</bool>
+                   <bool>false</bool>
                   </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -4810,27 +4822,27 @@ QPushButton:pressed {
                  <property name="labelAlignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <item row="1" column="0">
+                 <item row="0" column="0">
                   <widget class="QLabel" name="label_30">
                    <property name="text">
                     <string>Auteur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="0" column="1">
                   <widget class="QLineEdit" name="ebooks_auteur"/>
                  </item>
-                 <item row="2" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="label_37">
                    <property name="text">
                     <string>Éditeur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="1" column="1">
                   <widget class="QLineEdit" name="ebooks_editeur"/>
                  </item>
-                 <item row="3" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_31">
                    <property name="font">
                     <font>
@@ -4843,7 +4855,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
+                 <item row="2" column="1">
                   <widget class="QComboBox" name="ebooks_langue">
                    <property name="currentText">
                     <string/>
@@ -4873,7 +4885,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="3" column="0">
                   <widget class="QLabel" name="label_32">
                    <property name="font">
                     <font>
@@ -4886,7 +4898,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="3" column="1">
                   <widget class="QComboBox" name="ebooks_format">
                    <property name="currentText">
                     <string/>
@@ -4966,14 +4978,14 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="5" column="0">
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_34">
                    <property name="text">
                     <string>Genre :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1">
+                 <item row="4" column="1">
                   <widget class="QLineEdit" name="ebooks_genre"/>
                  </item>
                 </layout>
@@ -5286,6 +5298,18 @@ QPushButton:pressed {
           </widget>
           <widget class="QWidget" name="pageApp">
            <layout class="QVBoxLayout" name="verticalLayout_11">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_15">
               <property name="sizeConstraint">
@@ -5333,13 +5357,25 @@ QPushButton:pressed {
               <property name="title">
                <string>Infos sur le jeu/l'application</string>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <layout class="QVBoxLayout" name="verticalLayout_13">
+               <property name="leftMargin">
+                <number>9</number>
+               </property>
+               <property name="topMargin">
+                <number>9</number>
+               </property>
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <property name="bottomMargin">
+                <number>9</number>
+               </property>
                <item>
                 <layout class="QFormLayout" name="formLayout_7">
                  <property name="labelAlignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <item row="1" column="0">
+                 <item row="0" column="0">
                   <widget class="QLabel" name="label_38">
                    <property name="font">
                     <font>
@@ -5352,10 +5388,10 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="0" column="1">
                   <widget class="QLineEdit" name="app_nom"/>
                  </item>
-                 <item row="2" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="label_39">
                    <property name="font">
                     <font>
@@ -5368,7 +5404,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="1" column="1">
                   <widget class="QComboBox" name="app_langue">
                    <property name="currentText">
                     <string/>
@@ -5398,7 +5434,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="3" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_42">
                    <property name="font">
                     <font>
@@ -5411,8 +5447,11 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
+                 <item row="2" column="1">
                   <widget class="QComboBox" name="app_os">
+                   <property name="currentText">
+                    <string/>
+                   </property>
                    <property name="currentIndex">
                     <number>-1</number>
                    </property>
@@ -5436,69 +5475,194 @@ QPushButton:pressed {
                      <string>Téléphone</string>
                     </property>
                    </item>
+                   <item>
+                    <property name="text">
+                     <string>Console</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="3" column="0">
                   <widget class="QLabel" name="label_52">
                    <property name="text">
                     <string>Taille :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="3" column="1">
                   <widget class="QLineEdit" name="app_taille">
                    <property name="readOnly">
                     <bool>true</bool>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0">
-                  <widget class="QLabel" name="label_40">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Config. minimum :
-(ou version 
-Android/iOS/WP 
-min. si pour 
-smartphone)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1">
-                  <widget class="QPlainTextEdit" name="app_confMin"/>
-                 </item>
-                 <item row="7" column="0">
-                  <widget class="QLabel" name="label_41">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Étapes d'installation :</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QPlainTextEdit" name="app_install"/>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QLineEdit" name="app_genre"/>
-                 </item>
-                 <item row="5" column="0">
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_46">
                    <property name="text">
                     <string>Genre :</string>
                    </property>
                   </widget>
                  </item>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="app_genre"/>
+                 </item>
                 </layout>
+               </item>
+               <item>
+                <widget class="QStackedWidget" name="app_swCon">
+                 <property name="currentIndex">
+                  <number>1</number>
+                 </property>
+                 <widget class="QWidget" name="pagePC">
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QFormLayout" name="formLayout_9">
+                     <property name="labelAlignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_40">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Config. minimum :
+(ou version 
+Android/iOS/WP 
+min. si pour 
+smartphone)</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPlainTextEdit" name="app_confMin"/>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_41">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Étapes d'installation :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPlainTextEdit" name="app_install"/>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="pageCon">
+                  <layout class="QVBoxLayout" name="verticalLayout_14">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QFormLayout" name="formLayout_10">
+                     <property name="labelAlignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <item row="0" column="1">
+                      <widget class="QComboBox" name="con_type">
+                       <property name="currentIndex">
+                        <number>-1</number>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Microsoft</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Nintendo</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Sony</string>
+                        </property>
+                       </item>
+                      </widget>
+                     </item>
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_29">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Constructeur :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_48">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Console :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QComboBox" name="con_console"/>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QLineEdit" name="con_firmw"/>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="con_lblFirmw">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Firmware :</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -5516,7 +5680,7 @@ smartphone)</string>
            </sizepolicy>
           </property>
           <property name="title">
-           <string>Infos sur l'up</string>
+           <string>Infos sur le torrent</string>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
@@ -5526,6 +5690,12 @@ smartphone)</string>
              </property>
              <item row="1" column="0">
               <widget class="QLabel" name="label_20">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Uploader :</string>
                </property>
@@ -5536,8 +5706,14 @@ smartphone)</string>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_21">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
-                <string>Nom de l'up :</string>
+                <string>Nom du torrent :</string>
                </property>
               </widget>
              </item>
@@ -5612,6 +5788,9 @@ smartphone)</string>
            <number>0</number>
           </property>
           <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
            <number>0</number>
           </property>
           <property name="rightMargin">
