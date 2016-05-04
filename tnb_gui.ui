@@ -46,7 +46,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageHome">
        <property name="sizePolicy">
@@ -207,8 +207,8 @@
              <string>eBook</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>image/book.png</normaloff>image/book.png</iconset>
+             <iconset resource="images.qrc">
+              <normaloff>:/image/book.png</normaloff>:/image/book.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -691,7 +691,7 @@ QPushButton:pressed {
                    <item row="1" column="0">
                     <widget class="QLabel" name="label_8">
                      <property name="text">
-                      <string>Fréquence (Hz) :</string>
+                      <string>Fréquence :</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -718,7 +718,11 @@ QPushButton:pressed {
                     </widget>
                    </item>
                    <item row="2" column="1">
-                    <widget class="QLineEdit" name="audio_channel"/>
+                    <widget class="QLineEdit" name="audio_channel">
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
                    </item>
                    <item row="3" column="0">
                     <widget class="QLabel" name="label_10">
@@ -770,7 +774,7 @@ QPushButton:pressed {
                     </widget>
                    </item>
                    <item row="5" column="1">
-                    <widget class="QComboBox" name="comboBox">
+                    <widget class="QComboBox" name="audio_genre">
                      <property name="editable">
                       <bool>true</bool>
                      </property>
@@ -3970,10 +3974,16 @@ QPushButton:pressed {
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="verticalSpacing">
-                    <number>4</number>
+                    <number>7</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_6">
+                     <property name="font">
+                      <font>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
                      <property name="text">
                       <string>Durée totale :</string>
                      </property>
@@ -3982,29 +3992,14 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="1">
-                    <widget class="QLineEdit" name="audio_id3tag_1"/>
-                   </item>
-                   <item row="4" column="1">
-                    <widget class="QLineEdit" name="audio_id3tag_2"/>
-                   </item>
-                   <item row="5" column="1">
-                    <widget class="QLineEdit" name="audio_apeTag"/>
-                   </item>
-                   <item row="6" column="1">
-                    <widget class="QLineEdit" name="audio_vorbisTag"/>
-                   </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="label_14">
-                     <property name="text">
-                      <string>Taille totale :</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <item row="0" column="1">
+                    <widget class="QLineEdit" name="audio_totalTime">
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0">
+                   <item row="1" column="0">
                     <widget class="QLabel" name="label_15">
                      <property name="text">
                       <string>Année :</string>
@@ -4014,47 +4009,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0">
-                    <widget class="QLabel" name="label_16">
-                     <property name="text">
-                      <string>Tag ID3 1 :</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="0">
-                    <widget class="QLabel" name="label_17">
-                     <property name="text">
-                      <string>Tag ID3 2 :</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="5" column="0">
-                    <widget class="QLabel" name="label_18">
-                     <property name="text">
-                      <string>Tag APE :</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="6" column="0">
-                    <widget class="QLabel" name="label_19">
-                     <property name="text">
-                      <string>Tag Vorbis :</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="1">
+                   <item row="1" column="1">
                     <widget class="QSpinBox" name="audio_year">
                      <property name="frame">
                       <bool>true</bool>
@@ -4085,19 +4040,57 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1">
-                    <widget class="QLineEdit" name="audio_totalTime">
-                     <property name="readOnly">
-                      <bool>true</bool>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_16">
+                     <property name="text">
+                      <string>Tag ID3 1 :</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="audio_totalSize">
-                     <property name="readOnly">
-                      <bool>true</bool>
+                   <item row="2" column="1">
+                    <widget class="QLineEdit" name="audio_id3tag_1"/>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label_17">
+                     <property name="text">
+                      <string>Tag ID3 2 :</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
                     </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QLineEdit" name="audio_id3tag_2"/>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="QLabel" name="label_18">
+                     <property name="text">
+                      <string>Tag APE :</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1">
+                    <widget class="QLineEdit" name="audio_apeTag"/>
+                   </item>
+                   <item row="5" column="0">
+                    <widget class="QLabel" name="label_19">
+                     <property name="text">
+                      <string>Tag Vorbis :</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="1">
+                    <widget class="QLineEdit" name="audio_vorbisTag"/>
                    </item>
                   </layout>
                  </item>
@@ -4472,12 +4465,9 @@ QPushButton:pressed {
                   </widget>
                  </item>
                  <item row="3" column="1">
-                  <widget class="QSpinBox" name="ebook_pages">
-                   <property name="specialValueText">
-                    <string> </string>
-                   </property>
-                   <property name="maximum">
-                    <number>99999</number>
+                  <widget class="QLineEdit" name="ebook_pages">
+                   <property name="readOnly">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
@@ -4564,20 +4554,6 @@ QPushButton:pressed {
                   </widget>
                  </item>
                  <item row="10" column="0">
-                  <widget class="QLabel" name="label_36">
-                   <property name="text">
-                    <string>Taille :</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="1">
-                  <widget class="QLineEdit" name="ebook_taille">
-                   <property name="readOnly">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="0">
                   <widget class="QLabel" name="lblDim">
                    <property name="font">
                     <font>
@@ -4590,7 +4566,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="11" column="1">
+                 <item row="10" column="1">
                   <widget class="QLineEdit" name="ebook_dimensions"/>
                  </item>
                 </layout>
@@ -5220,8 +5196,8 @@ QPushButton:pressed {
                   <widget class="QLabel" name="label_44">
                    <property name="font">
                     <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
+                     <weight>75</weight>
+                     <bold>true</bold>
                     </font>
                    </property>
                    <property name="text">
@@ -5240,23 +5216,6 @@ QPushButton:pressed {
                   </widget>
                  </item>
                  <item row="1" column="0">
-                  <widget class="QLabel" name="label_45">
-                   <property name="text">
-                    <string>Taille totale :</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLineEdit" name="film_totalSize">
-                   <property name="readOnly">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
                   <widget class="QLabel" name="label_43">
                    <property name="font">
                     <font>
@@ -5269,7 +5228,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="1" column="1">
                   <widget class="QComboBox" name="film_format">
                    <property name="currentText">
                     <string/>
@@ -5483,27 +5442,13 @@ QPushButton:pressed {
                   </widget>
                  </item>
                  <item row="3" column="0">
-                  <widget class="QLabel" name="label_52">
-                   <property name="text">
-                    <string>Taille :</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLineEdit" name="app_taille">
-                   <property name="readOnly">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
                   <widget class="QLabel" name="label_46">
                    <property name="text">
                     <string>Genre :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="3" column="1">
                   <widget class="QLineEdit" name="app_genre"/>
                  </item>
                 </layout>
@@ -5511,7 +5456,7 @@ QPushButton:pressed {
                <item>
                 <widget class="QStackedWidget" name="app_swCon">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="pagePC">
                   <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -5550,7 +5495,14 @@ smartphone)</string>
                       </widget>
                      </item>
                      <item row="0" column="1">
-                      <widget class="QPlainTextEdit" name="app_confMin"/>
+                      <widget class="QPlainTextEdit" name="app_confMin">
+                       <property name="font">
+                        <font>
+                         <family>Consolas</family>
+                         <pointsize>10</pointsize>
+                        </font>
+                       </property>
+                      </widget>
                      </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="label_41">
@@ -5566,7 +5518,14 @@ smartphone)</string>
                       </widget>
                      </item>
                      <item row="1" column="1">
-                      <widget class="QPlainTextEdit" name="app_install"/>
+                      <widget class="QPlainTextEdit" name="app_install">
+                       <property name="font">
+                        <font>
+                         <family>Consolas</family>
+                         <pointsize>10</pointsize>
+                        </font>
+                       </property>
+                      </widget>
                      </item>
                     </layout>
                    </item>
@@ -5720,15 +5679,21 @@ smartphone)</string>
              <item row="0" column="1">
               <widget class="QLineEdit" name="txt_relName"/>
              </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="label_22">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
-                <string>Notes :</string>
+                <string>Description :</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QTextEdit" name="txt_relNotes">
+             <item row="3" column="1">
+              <widget class="QPlainTextEdit" name="txt_relNotes">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
                  <horstretch>0</horstretch>
@@ -5740,6 +5705,32 @@ smartphone)</string>
                  <width>16777215</width>
                  <height>100</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="txt_totalSize">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Taille totale :</string>
                </property>
               </widget>
              </item>
