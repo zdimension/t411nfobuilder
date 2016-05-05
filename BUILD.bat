@@ -1,1 +1,1 @@
-python setup.py build
+pyinstaller --additional-hooks-dir=. -w -y main.pyw

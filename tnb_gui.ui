@@ -46,7 +46,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="pageHome">
        <property name="sizePolicy">
@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -442,11 +442,14 @@ QPushButton:pressed {
                 <property name="alternatingRowColors">
                  <bool>true</bool>
                 </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
                 <property name="gridStyle">
                  <enum>Qt::SolidLine</enum>
                 </property>
                 <property name="columnCount">
-                 <number>10</number>
+                 <number>9</number>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -469,11 +472,6 @@ QPushButton:pressed {
                 </column>
                 <column>
                  <property name="text">
-                  <string>Auteur</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
                   <string>Titre</string>
                  </property>
                 </column>
@@ -484,17 +482,12 @@ QPushButton:pressed {
                 </column>
                 <column>
                  <property name="text">
+                  <string>Album</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
                   <string>Taille</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Année</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>Genre</string>
                  </property>
                 </column>
                 <column>
@@ -505,6 +498,11 @@ QPushButton:pressed {
                 <column>
                  <property name="text">
                   <string>Bitrate</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>filename</string>
                  </property>
                 </column>
                </widget>
@@ -657,7 +655,7 @@ QPushButton:pressed {
                     <number>5</number>
                    </property>
                    <property name="verticalSpacing">
-                    <number>8</number>
+                    <number>0</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_3">
@@ -688,7 +686,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="0">
+                   <item row="2" column="0">
                     <widget class="QLabel" name="label_8">
                      <property name="text">
                       <string>Fréquence :</string>
@@ -698,10 +696,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="1">
+                   <item row="2" column="1">
                     <widget class="QLineEdit" name="audio_freq"/>
                    </item>
-                   <item row="2" column="0">
+                   <item row="4" column="0">
                     <widget class="QLabel" name="label_9">
                      <property name="font">
                       <font>
@@ -717,14 +715,14 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="4" column="1">
                     <widget class="QLineEdit" name="audio_channel">
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0">
+                   <item row="6" column="0">
                     <widget class="QLabel" name="label_10">
                      <property name="text">
                       <string>Encodeur :</string>
@@ -734,10 +732,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="1">
+                   <item row="6" column="1">
                     <widget class="QLineEdit" name="audio_encoder"/>
                    </item>
-                   <item row="4" column="0">
+                   <item row="8" column="0">
                     <widget class="QLabel" name="label_11">
                      <property name="font">
                       <font>
@@ -753,7 +751,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="1">
+                   <item row="8" column="1">
                     <widget class="QLineEdit" name="audio_avrBitrate">
                      <property name="text">
                       <string/>
@@ -763,7 +761,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="0">
+                   <item row="10" column="0">
                     <widget class="QLabel" name="label_13">
                      <property name="text">
                       <string>Genre :</string>
@@ -773,7 +771,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1">
+                   <item row="10" column="1">
                     <widget class="QComboBox" name="audio_genre">
                      <property name="editable">
                       <bool>true</bool>
@@ -3966,6 +3964,71 @@ QPushButton:pressed {
                      </item>
                     </widget>
                    </item>
+                   <item row="1" column="1">
+                    <spacer name="verticalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="3" column="1">
+                    <spacer name="verticalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="5" column="1">
+                    <spacer name="verticalSpacer_3">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="7" column="1">
+                    <spacer name="verticalSpacer_4">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="9" column="1">
+                    <spacer name="verticalSpacer_5">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </item>
                  <item>
@@ -3974,7 +4037,7 @@ QPushButton:pressed {
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="verticalSpacing">
-                    <number>7</number>
+                    <number>0</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_6">
@@ -3999,7 +4062,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="0">
+                   <item row="2" column="0">
                     <widget class="QLabel" name="label_15">
                      <property name="text">
                       <string>Année :</string>
@@ -4009,7 +4072,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="1">
+                   <item row="2" column="1">
                     <widget class="QSpinBox" name="audio_year">
                      <property name="frame">
                       <bool>true</bool>
@@ -4040,7 +4103,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0">
+                   <item row="4" column="0">
                     <widget class="QLabel" name="label_16">
                      <property name="text">
                       <string>Tag ID3 1 :</string>
@@ -4050,10 +4113,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="4" column="1">
                     <widget class="QLineEdit" name="audio_id3tag_1"/>
                    </item>
-                   <item row="3" column="0">
+                   <item row="6" column="0">
                     <widget class="QLabel" name="label_17">
                      <property name="text">
                       <string>Tag ID3 2 :</string>
@@ -4063,10 +4126,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="1">
+                   <item row="6" column="1">
                     <widget class="QLineEdit" name="audio_id3tag_2"/>
                    </item>
-                   <item row="4" column="0">
+                   <item row="8" column="0">
                     <widget class="QLabel" name="label_18">
                      <property name="text">
                       <string>Tag APE :</string>
@@ -4076,10 +4139,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="1">
+                   <item row="8" column="1">
                     <widget class="QLineEdit" name="audio_apeTag"/>
                    </item>
-                   <item row="5" column="0">
+                   <item row="10" column="0">
                     <widget class="QLabel" name="label_19">
                      <property name="text">
                       <string>Tag Vorbis :</string>
@@ -4089,8 +4152,73 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1">
+                   <item row="10" column="1">
                     <widget class="QLineEdit" name="audio_vorbisTag"/>
+                   </item>
+                   <item row="1" column="1">
+                    <spacer name="verticalSpacer_6">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="3" column="1">
+                    <spacer name="verticalSpacer_7">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="5" column="1">
+                    <spacer name="verticalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="7" column="1">
+                    <spacer name="verticalSpacer_9">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="9" column="1">
+                    <spacer name="verticalSpacer_10">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </item>
@@ -4103,7 +4231,7 @@ QPushButton:pressed {
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="verticalSpacing">
-                    <number>9</number>
+                    <number>0</number>
                    </property>
                    <item row="0" column="1">
                     <widget class="QCheckBox" name="audio_isVariousArtists">
@@ -4112,21 +4240,21 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="1">
+                   <item row="2" column="1">
                     <widget class="QLineEdit" name="audio_variousArtists">
                      <property name="enabled">
                       <bool>false</bool>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="4" column="1">
                     <widget class="QCheckBox" name="audio_notMyRip">
                      <property name="text">
                       <string>NMR (Pas Mon Rip)</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0">
+                   <item row="5" column="0">
                     <widget class="QLabel" name="label_4">
                      <property name="text">
                       <string>Rippeur :</string>
@@ -4136,10 +4264,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="1">
+                   <item row="5" column="1">
                     <widget class="QLineEdit" name="audio_ripper"/>
                    </item>
-                   <item row="4" column="0">
+                   <item row="7" column="0">
                     <widget class="QLabel" name="label_5">
                      <property name="text">
                       <string>Lecteur:</string>
@@ -4149,10 +4277,10 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="1">
+                   <item row="7" column="1">
                     <widget class="QLineEdit" name="audio_cdmodel"/>
                    </item>
-                   <item row="5" column="0">
+                   <item row="9" column="0">
                     <widget class="QLabel" name="label_7">
                      <property name="text">
                       <string>Source :</string>
@@ -4162,7 +4290,7 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1">
+                   <item row="9" column="1">
                     <widget class="QComboBox" name="audio_source">
                      <property name="editable">
                       <bool>true</bool>
@@ -4222,6 +4350,58 @@ QPushButton:pressed {
                       </property>
                      </item>
                     </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <spacer name="verticalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="3" column="1">
+                    <spacer name="verticalSpacer_12">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="6" column="1">
+                    <spacer name="verticalSpacer_13">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="8" column="1">
+                    <spacer name="verticalSpacer_14">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </item>
@@ -4299,6 +4479,9 @@ QPushButton:pressed {
                  <property name="labelAlignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
+                 <property name="verticalSpacing">
+                  <number>0</number>
+                 </property>
                  <item row="0" column="0">
                   <widget class="QLabel" name="label_2">
                    <property name="font">
@@ -4315,7 +4498,7 @@ QPushButton:pressed {
                  <item row="0" column="1">
                   <widget class="QLineEdit" name="ebook_titre"/>
                  </item>
-                 <item row="1" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_12">
                    <property name="font">
                     <font>
@@ -4328,7 +4511,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="2" column="1">
                   <widget class="QComboBox" name="ebook_langue">
                    <property name="currentText">
                     <string/>
@@ -4358,7 +4541,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="4" column="0">
                   <widget class="QLabel" name="label_23">
                    <property name="font">
                     <font>
@@ -4371,7 +4554,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="4" column="1">
                   <widget class="QComboBox" name="ebook_format">
                    <property name="currentText">
                     <string/>
@@ -4451,7 +4634,7 @@ QPushButton:pressed {
                    </item>
                   </widget>
                  </item>
-                 <item row="3" column="0">
+                 <item row="6" column="0">
                   <widget class="QLabel" name="label_24">
                    <property name="font">
                     <font>
@@ -4464,79 +4647,79 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1">
+                 <item row="6" column="1">
                   <widget class="QLineEdit" name="ebook_pages">
                    <property name="readOnly">
                     <bool>true</bool>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="8" column="0">
                   <widget class="QLabel" name="label_25">
                    <property name="text">
                     <string>Genre :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="8" column="1">
                   <widget class="QLineEdit" name="ebook_genre"/>
                  </item>
-                 <item row="5" column="0">
+                 <item row="10" column="0">
                   <widget class="QLabel" name="label_33">
                    <property name="text">
                     <string>Auteur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="1">
+                 <item row="10" column="1">
                   <widget class="QLineEdit" name="ebook_auteur"/>
                  </item>
-                 <item row="6" column="0">
+                 <item row="12" column="0">
                   <widget class="QLabel" name="label_35">
                    <property name="text">
                     <string>Éditeur :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="1">
+                 <item row="12" column="1">
                   <widget class="QLineEdit" name="ebook_editeur"/>
                  </item>
-                 <item row="7" column="0">
+                 <item row="14" column="0">
                   <widget class="QLabel" name="label_26">
                    <property name="text">
                     <string>ISBN-10 :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1">
+                 <item row="14" column="1">
                   <widget class="QLineEdit" name="ebook_isbn10">
                    <property name="inputMask">
                     <string>9-999-99999-9</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="0">
+                 <item row="16" column="0">
                   <widget class="QLabel" name="label_27">
                    <property name="text">
                     <string>ISBN-13 :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
+                 <item row="16" column="1">
                   <widget class="QLineEdit" name="ebook_isbn13">
                    <property name="inputMask">
                     <string>999-9-99999-999-9</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="0">
+                 <item row="18" column="0">
                   <widget class="QLabel" name="label_28">
                    <property name="text">
                     <string>Date de parution :</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1">
+                 <item row="18" column="1">
                   <widget class="QDateEdit" name="ebook_date">
                    <property name="specialValueText">
                     <string> </string>
@@ -4553,7 +4736,7 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="0">
+                 <item row="20" column="0">
                   <widget class="QLabel" name="lblDim">
                    <property name="font">
                     <font>
@@ -4566,8 +4749,138 @@ QPushButton:pressed {
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="1">
+                 <item row="20" column="1">
                   <widget class="QLineEdit" name="ebook_dimensions"/>
+                 </item>
+                 <item row="1" column="1">
+                  <spacer name="verticalSpacer_15">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="3" column="1">
+                  <spacer name="verticalSpacer_16">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="5" column="1">
+                  <spacer name="verticalSpacer_17">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="1">
+                  <spacer name="verticalSpacer_18">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="9" column="1">
+                  <spacer name="verticalSpacer_19">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="11" column="1">
+                  <spacer name="verticalSpacer_20">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="13" column="1">
+                  <spacer name="verticalSpacer_21">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="15" column="1">
+                  <spacer name="verticalSpacer_22">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="17" column="1">
+                  <spacer name="verticalSpacer_23">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="19" column="1">
+                  <spacer name="verticalSpacer_24">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </item>
@@ -4608,6 +4921,9 @@ QPushButton:pressed {
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::SolidLine</enum>
@@ -5003,6 +5319,9 @@ QPushButton:pressed {
                 </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
                 </property>
                 <property name="gridStyle">
                  <enum>Qt::SolidLine</enum>
@@ -5651,8 +5970,8 @@ smartphone)</string>
               <widget class="QLabel" name="label_20">
                <property name="font">
                 <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -5683,8 +6002,8 @@ smartphone)</string>
               <widget class="QLabel" name="label_22">
                <property name="font">
                 <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">

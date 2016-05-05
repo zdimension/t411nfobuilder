@@ -8,7 +8,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -147,21 +146,21 @@ class Ui_MainWindow(object):
         self.btnGoHome.setMinimumSize(QtCore.QSize(33, 33))
         self.btnGoHome.setMaximumSize(QtCore.QSize(33, 33))
         self.btnGoHome.setStyleSheet("QPushButton {\n"
-                                     "    background-repeat: no-repeat;\n"
-                                     "    background-position: center center;\n"
-                                     "    background-image: url(:/image/home.png);\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 3px;\n"
-                                     "}\n"
-                                     "QPushButton:enabled {\n"
-                                     "    background-color: #1565c0;\n"
-                                     "}\n"
-                                     "QPushButton:hover {\n"
-                                     "    background-color: #1976d2;\n"
-                                     "}\n"
-                                     "QPushButton:pressed {\n"
-                                     "    background-color: #0d47a1;\n"
-                                     "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/home.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #1565c0;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #1976d2;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #0d47a1;\n"
+"}")
         self.btnGoHome.setText("")
         self.btnGoHome.setIconSize(QtCore.QSize(33, 33))
         self.btnGoHome.setFlat(True)
@@ -184,22 +183,22 @@ class Ui_MainWindow(object):
         self.btnGenNfo.setMinimumSize(QtCore.QSize(33, 33))
         self.btnGenNfo.setMaximumSize(QtCore.QSize(33, 33))
         self.btnGenNfo.setStyleSheet("QPushButton {\n"
-                                     "    background-repeat: no-repeat;\n"
-                                     "    background-position: center center;\n"
-                                     "    background-image: url(:/image/gen.png);\n"
-                                     "    border: none;\n"
-                                     "    border-radius: 3px;\n"
-                                     "    \n"
-                                     "}\n"
-                                     "QPushButton:enabled {\n"
-                                     "    background-color: #2e7d32;\n"
-                                     "}\n"
-                                     "QPushButton:hover {\n"
-                                     "    background-color: #388e3c;\n"
-                                     "}\n"
-                                     "QPushButton:pressed {\n"
-                                     "    background-color: #1b5e20;\n"
-                                     "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/gen.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"    \n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #2e7d32;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #388e3c;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1b5e20;\n"
+"}")
         self.btnGenNfo.setText("")
         self.btnGenNfo.setIconSize(QtCore.QSize(33, 33))
         self.btnGenNfo.setFlat(True)
@@ -221,8 +220,9 @@ class Ui_MainWindow(object):
         self.audio_files.setAcceptDrops(True)
         self.audio_files.setLineWidth(1)
         self.audio_files.setAlternatingRowColors(True)
+        self.audio_files.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.audio_files.setGridStyle(QtCore.Qt.SolidLine)
-        self.audio_files.setColumnCount(10)
+        self.audio_files.setColumnCount(9)
         self.audio_files.setObjectName("audio_files")
         self.audio_files.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
@@ -243,8 +243,6 @@ class Ui_MainWindow(object):
         self.audio_files.setHorizontalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
         self.audio_files.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.audio_files.setHorizontalHeaderItem(9, item)
         self.audio_files.verticalHeader().setVisible(False)
         self.audio_files.verticalHeader().setDefaultSectionSize(20)
         self.audio_files.verticalHeader().setMinimumSectionSize(20)
@@ -262,21 +260,21 @@ class Ui_MainWindow(object):
         self.audio_addFiles.setMinimumSize(QtCore.QSize(56, 56))
         self.audio_addFiles.setMaximumSize(QtCore.QSize(56, 56))
         self.audio_addFiles.setStyleSheet("QPushButton {\n"
-                                          "    background-repeat: no-repeat;\n"
-                                          "    background-position: center center;\n"
-                                          "    background-image: url(:/image/add.png);\n"
-                                          "    border: none;\n"
-                                          "    border-radius: 3px;\n"
-                                          "}\n"
-                                          "QPushButton:enabled {\n"
-                                          "    background-color: #558b2f;\n"
-                                          "}\n"
-                                          "QPushButton:hover {\n"
-                                          "    background-color: #689f38;\n"
-                                          "}\n"
-                                          "QPushButton:pressed {\n"
-                                          "    background-color: #33691e;\n"
-                                          "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/add.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #558b2f;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #689f38;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #33691e;\n"
+"}")
         self.audio_addFiles.setText("")
         self.audio_addFiles.setIconSize(QtCore.QSize(5, 5))
         self.audio_addFiles.setFlat(True)
@@ -292,24 +290,24 @@ class Ui_MainWindow(object):
         self.audio_removeRows.setMinimumSize(QtCore.QSize(56, 56))
         self.audio_removeRows.setMaximumSize(QtCore.QSize(56, 56))
         self.audio_removeRows.setStyleSheet("QPushButton {\n"
-                                            "    background-repeat: no-repeat;\n"
-                                            "    background-position: center center;\n"
-                                            "    background-image: url(:/image/remove.png);\n"
-                                            "    border: none;\n"
-                                            "    border-radius: 3px;\n"
-                                            "}\n"
-                                            "QPushButton:disabled {\n"
-                                            "    background-image: url(:/image/remove-disabled.png);\n"
-                                            "}\n"
-                                            "QPushButton:enabled {\n"
-                                            "    background-color: #c62828;\n"
-                                            "}\n"
-                                            "QPushButton:hover {\n"
-                                            "    background-color: #d32f2f;\n"
-                                            "}\n"
-                                            "QPushButton:pressed {\n"
-                                            "    background-color: #b71c1c;\n"
-                                            "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/remove.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-image: url(:/image/remove-disabled.png);\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #c62828;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #d32f2f;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #b71c1c;\n"
+"}")
         self.audio_removeRows.setText("")
         self.audio_removeRows.setIconSize(QtCore.QSize(5, 5))
         self.audio_removeRows.setFlat(True)
@@ -327,9 +325,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
-        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setHorizontalSpacing(5)
-        self.formLayout.setVerticalSpacing(8)
+        self.formLayout.setVerticalSpacing(0)
         self.formLayout.setObjectName("formLayout")
         self.label_3 = QtWidgets.QLabel(self.horizontalGroupBox_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -341,7 +339,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_3.setFont(font)
-        self.label_3.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
         self.audio_codec = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
@@ -349,48 +347,48 @@ class Ui_MainWindow(object):
         self.audio_codec.setObjectName("audio_codec")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.audio_codec)
         self.label_8 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_8.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_8.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_8.setObjectName("label_8")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_8)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_8)
         self.audio_freq = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_freq.setObjectName("audio_freq")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.audio_freq)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_freq)
         self.label_9 = QtWidgets.QLabel(self.horizontalGroupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_9.setFont(font)
-        self.label_9.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_9.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_9.setObjectName("label_9")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_9)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_9)
         self.audio_channel = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_channel.setReadOnly(True)
         self.audio_channel.setObjectName("audio_channel")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_channel)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_channel)
         self.label_10 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_10.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_10.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_10.setObjectName("label_10")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_10)
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_10)
         self.audio_encoder = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_encoder.setObjectName("audio_encoder")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.audio_encoder)
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.audio_encoder)
         self.label_11 = QtWidgets.QLabel(self.horizontalGroupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_11.setFont(font)
-        self.label_11.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_11.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_11.setObjectName("label_11")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_11)
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.label_11)
         self.audio_avrBitrate = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_avrBitrate.setText("")
         self.audio_avrBitrate.setReadOnly(True)
         self.audio_avrBitrate.setObjectName("audio_avrBitrate")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_avrBitrate)
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.audio_avrBitrate)
         self.label_13 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_13.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_13.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_13.setObjectName("label_13")
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_13)
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.label_13)
         self.audio_genre = QtWidgets.QComboBox(self.horizontalGroupBox_2)
         self.audio_genre.setEditable(True)
         self.audio_genre.setCurrentText("")
@@ -1031,18 +1029,28 @@ class Ui_MainWindow(object):
         self.audio_genre.addItem("")
         self.audio_genre.addItem("")
         self.audio_genre.addItem("")
-        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.audio_genre)
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.audio_genre)
+        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(1, QtWidgets.QFormLayout.FieldRole, spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(3, QtWidgets.QFormLayout.FieldRole, spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(5, QtWidgets.QFormLayout.FieldRole, spacerItem2)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(7, QtWidgets.QFormLayout.FieldRole, spacerItem3)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(9, QtWidgets.QFormLayout.FieldRole, spacerItem4)
         self.horizontalLayout_4.addLayout(self.formLayout)
         self.formLayout_4 = QtWidgets.QFormLayout()
-        self.formLayout_4.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.formLayout_4.setVerticalSpacing(7)
+        self.formLayout_4.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout_4.setVerticalSpacing(0)
         self.formLayout_4.setObjectName("formLayout_4")
         self.label_6 = QtWidgets.QLabel(self.horizontalGroupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_6.setFont(font)
-        self.label_6.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_6.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_6.setObjectName("label_6")
         self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_6)
         self.audio_totalTime = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
@@ -1050,9 +1058,9 @@ class Ui_MainWindow(object):
         self.audio_totalTime.setObjectName("audio_totalTime")
         self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.audio_totalTime)
         self.label_15 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_15.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_15.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_15.setObjectName("label_15")
-        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_15)
+        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_15)
         self.audio_year = QtWidgets.QSpinBox(self.horizontalGroupBox_2)
         self.audio_year.setFrame(True)
         self.audio_year.setButtonSymbols(QtWidgets.QAbstractSpinBox.PlusMinus)
@@ -1063,40 +1071,50 @@ class Ui_MainWindow(object):
         self.audio_year.setProperty("value", -1)
         self.audio_year.setDisplayIntegerBase(10)
         self.audio_year.setObjectName("audio_year")
-        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.audio_year)
+        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_year)
         self.label_16 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_16.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_16.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_16.setObjectName("label_16")
-        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_16)
+        self.formLayout_4.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_16)
         self.audio_id3tag_1 = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_id3tag_1.setObjectName("audio_id3tag_1")
-        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_id3tag_1)
+        self.formLayout_4.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_id3tag_1)
         self.label_17 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_17.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_17.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_17.setObjectName("label_17")
-        self.formLayout_4.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_17)
+        self.formLayout_4.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_17)
         self.audio_id3tag_2 = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_id3tag_2.setObjectName("audio_id3tag_2")
-        self.formLayout_4.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.audio_id3tag_2)
+        self.formLayout_4.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.audio_id3tag_2)
         self.label_18 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_18.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_18.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_18.setObjectName("label_18")
-        self.formLayout_4.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_18)
+        self.formLayout_4.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.label_18)
         self.audio_apeTag = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_apeTag.setObjectName("audio_apeTag")
-        self.formLayout_4.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_apeTag)
+        self.formLayout_4.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.audio_apeTag)
         self.label_19 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_19.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_19.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_19.setObjectName("label_19")
-        self.formLayout_4.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_19)
+        self.formLayout_4.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.label_19)
         self.audio_vorbisTag = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_vorbisTag.setObjectName("audio_vorbisTag")
-        self.formLayout_4.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.audio_vorbisTag)
+        self.formLayout_4.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.audio_vorbisTag)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_4.setItem(1, QtWidgets.QFormLayout.FieldRole, spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_4.setItem(3, QtWidgets.QFormLayout.FieldRole, spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_4.setItem(5, QtWidgets.QFormLayout.FieldRole, spacerItem7)
+        spacerItem8 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_4.setItem(7, QtWidgets.QFormLayout.FieldRole, spacerItem8)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_4.setItem(9, QtWidgets.QFormLayout.FieldRole, spacerItem9)
         self.horizontalLayout_4.addLayout(self.formLayout_4)
         self.formLayout_2 = QtWidgets.QFormLayout()
         self.formLayout_2.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
-        self.formLayout_2.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.formLayout_2.setVerticalSpacing(9)
+        self.formLayout_2.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout_2.setVerticalSpacing(0)
         self.formLayout_2.setObjectName("formLayout_2")
         self.audio_isVariousArtists = QtWidgets.QCheckBox(self.horizontalGroupBox_2)
         self.audio_isVariousArtists.setObjectName("audio_isVariousArtists")
@@ -1104,28 +1122,28 @@ class Ui_MainWindow(object):
         self.audio_variousArtists = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_variousArtists.setEnabled(False)
         self.audio_variousArtists.setObjectName("audio_variousArtists")
-        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.audio_variousArtists)
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_variousArtists)
         self.audio_notMyRip = QtWidgets.QCheckBox(self.horizontalGroupBox_2)
         self.audio_notMyRip.setObjectName("audio_notMyRip")
-        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.audio_notMyRip)
+        self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_notMyRip)
         self.label_4 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_4.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_4.setObjectName("label_4")
-        self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_4)
+        self.formLayout_2.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_4)
         self.audio_ripper = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_ripper.setObjectName("audio_ripper")
-        self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.audio_ripper)
+        self.formLayout_2.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.audio_ripper)
         self.label_5 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_5.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_5.setObjectName("label_5")
-        self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_5)
+        self.formLayout_2.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.label_5)
         self.audio_cdmodel = QtWidgets.QLineEdit(self.horizontalGroupBox_2)
         self.audio_cdmodel.setObjectName("audio_cdmodel")
-        self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.audio_cdmodel)
+        self.formLayout_2.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.audio_cdmodel)
         self.label_7 = QtWidgets.QLabel(self.horizontalGroupBox_2)
-        self.label_7.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_7.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_7.setObjectName("label_7")
-        self.formLayout_2.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_7)
+        self.formLayout_2.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.label_7)
         self.audio_source = QtWidgets.QComboBox(self.horizontalGroupBox_2)
         self.audio_source.setEditable(True)
         self.audio_source.setFrame(True)
@@ -1139,7 +1157,15 @@ class Ui_MainWindow(object):
         self.audio_source.addItem("")
         self.audio_source.addItem("")
         self.audio_source.addItem("")
-        self.formLayout_2.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.audio_source)
+        self.formLayout_2.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.audio_source)
+        spacerItem10 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_2.setItem(1, QtWidgets.QFormLayout.FieldRole, spacerItem10)
+        spacerItem11 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_2.setItem(3, QtWidgets.QFormLayout.FieldRole, spacerItem11)
+        spacerItem12 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_2.setItem(6, QtWidgets.QFormLayout.FieldRole, spacerItem12)
+        spacerItem13 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_2.setItem(8, QtWidgets.QFormLayout.FieldRole, spacerItem13)
         self.horizontalLayout_4.addLayout(self.formLayout_2)
         self.horizontalLayout_3.addLayout(self.horizontalLayout_4)
         self.verticalLayout.addWidget(self.horizontalGroupBox_2)
@@ -1180,7 +1206,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.groupBox_2)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.formLayout_5 = QtWidgets.QFormLayout()
-        self.formLayout_5.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_5.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout_5.setVerticalSpacing(0)
         self.formLayout_5.setObjectName("formLayout_5")
         self.label_2 = QtWidgets.QLabel(self.groupBox_2)
         font = QtGui.QFont()
@@ -1198,7 +1225,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
-        self.formLayout_5.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_12)
+        self.formLayout_5.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_12)
         self.ebook_langue = QtWidgets.QComboBox(self.groupBox_2)
         self.ebook_langue.setCurrentText("")
         self.ebook_langue.setObjectName("ebook_langue")
@@ -1206,14 +1233,14 @@ class Ui_MainWindow(object):
         self.ebook_langue.addItem("")
         self.ebook_langue.addItem("")
         self.ebook_langue.addItem("")
-        self.formLayout_5.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.ebook_langue)
+        self.formLayout_5.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.ebook_langue)
         self.label_23 = QtWidgets.QLabel(self.groupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_23.setFont(font)
         self.label_23.setObjectName("label_23")
-        self.formLayout_5.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_23)
+        self.formLayout_5.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_23)
         self.ebook_format = QtWidgets.QComboBox(self.groupBox_2)
         self.ebook_format.setCurrentText("")
         self.ebook_format.setObjectName("ebook_format")
@@ -1231,66 +1258,86 @@ class Ui_MainWindow(object):
         self.ebook_format.addItem("")
         self.ebook_format.addItem("")
         self.ebook_format.addItem("")
-        self.formLayout_5.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.ebook_format)
+        self.formLayout_5.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.ebook_format)
         self.label_24 = QtWidgets.QLabel(self.groupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_24.setFont(font)
         self.label_24.setObjectName("label_24")
-        self.formLayout_5.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_24)
+        self.formLayout_5.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_24)
         self.ebook_pages = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_pages.setReadOnly(True)
         self.ebook_pages.setObjectName("ebook_pages")
-        self.formLayout_5.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.ebook_pages)
+        self.formLayout_5.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.ebook_pages)
         self.label_25 = QtWidgets.QLabel(self.groupBox_2)
         self.label_25.setObjectName("label_25")
-        self.formLayout_5.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_25)
+        self.formLayout_5.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.label_25)
         self.ebook_genre = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_genre.setObjectName("ebook_genre")
-        self.formLayout_5.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.ebook_genre)
+        self.formLayout_5.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.ebook_genre)
         self.label_33 = QtWidgets.QLabel(self.groupBox_2)
         self.label_33.setObjectName("label_33")
-        self.formLayout_5.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_33)
+        self.formLayout_5.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.label_33)
         self.ebook_auteur = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_auteur.setObjectName("ebook_auteur")
-        self.formLayout_5.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.ebook_auteur)
+        self.formLayout_5.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.ebook_auteur)
         self.label_35 = QtWidgets.QLabel(self.groupBox_2)
         self.label_35.setObjectName("label_35")
-        self.formLayout_5.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.label_35)
+        self.formLayout_5.setWidget(12, QtWidgets.QFormLayout.LabelRole, self.label_35)
         self.ebook_editeur = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_editeur.setObjectName("ebook_editeur")
-        self.formLayout_5.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.ebook_editeur)
+        self.formLayout_5.setWidget(12, QtWidgets.QFormLayout.FieldRole, self.ebook_editeur)
         self.label_26 = QtWidgets.QLabel(self.groupBox_2)
         self.label_26.setObjectName("label_26")
-        self.formLayout_5.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.label_26)
+        self.formLayout_5.setWidget(14, QtWidgets.QFormLayout.LabelRole, self.label_26)
         self.ebook_isbn10 = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_isbn10.setObjectName("ebook_isbn10")
-        self.formLayout_5.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.ebook_isbn10)
+        self.formLayout_5.setWidget(14, QtWidgets.QFormLayout.FieldRole, self.ebook_isbn10)
         self.label_27 = QtWidgets.QLabel(self.groupBox_2)
         self.label_27.setObjectName("label_27")
-        self.formLayout_5.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.label_27)
+        self.formLayout_5.setWidget(16, QtWidgets.QFormLayout.LabelRole, self.label_27)
         self.ebook_isbn13 = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_isbn13.setObjectName("ebook_isbn13")
-        self.formLayout_5.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.ebook_isbn13)
+        self.formLayout_5.setWidget(16, QtWidgets.QFormLayout.FieldRole, self.ebook_isbn13)
         self.label_28 = QtWidgets.QLabel(self.groupBox_2)
         self.label_28.setObjectName("label_28")
-        self.formLayout_5.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.label_28)
+        self.formLayout_5.setWidget(18, QtWidgets.QFormLayout.LabelRole, self.label_28)
         self.ebook_date = QtWidgets.QDateEdit(self.groupBox_2)
         self.ebook_date.setCalendarPopup(True)
         self.ebook_date.setDate(QtCore.QDate(1752, 9, 14))
         self.ebook_date.setObjectName("ebook_date")
-        self.formLayout_5.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.ebook_date)
+        self.formLayout_5.setWidget(18, QtWidgets.QFormLayout.FieldRole, self.ebook_date)
         self.lblDim = QtWidgets.QLabel(self.groupBox_2)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.lblDim.setFont(font)
         self.lblDim.setObjectName("lblDim")
-        self.formLayout_5.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.lblDim)
+        self.formLayout_5.setWidget(20, QtWidgets.QFormLayout.LabelRole, self.lblDim)
         self.ebook_dimensions = QtWidgets.QLineEdit(self.groupBox_2)
         self.ebook_dimensions.setObjectName("ebook_dimensions")
-        self.formLayout_5.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.ebook_dimensions)
+        self.formLayout_5.setWidget(20, QtWidgets.QFormLayout.FieldRole, self.ebook_dimensions)
+        spacerItem14 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(1, QtWidgets.QFormLayout.FieldRole, spacerItem14)
+        spacerItem15 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(3, QtWidgets.QFormLayout.FieldRole, spacerItem15)
+        spacerItem16 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(5, QtWidgets.QFormLayout.FieldRole, spacerItem16)
+        spacerItem17 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(7, QtWidgets.QFormLayout.FieldRole, spacerItem17)
+        spacerItem18 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(9, QtWidgets.QFormLayout.FieldRole, spacerItem18)
+        spacerItem19 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(11, QtWidgets.QFormLayout.FieldRole, spacerItem19)
+        spacerItem20 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(13, QtWidgets.QFormLayout.FieldRole, spacerItem20)
+        spacerItem21 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(15, QtWidgets.QFormLayout.FieldRole, spacerItem21)
+        spacerItem22 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(17, QtWidgets.QFormLayout.FieldRole, spacerItem22)
+        spacerItem23 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout_5.setItem(19, QtWidgets.QFormLayout.FieldRole, spacerItem23)
         self.horizontalLayout_9.addLayout(self.formLayout_5)
         self.verticalLayout_3.addWidget(self.groupBox_2)
         self.pages.addWidget(self.pageEBook)
@@ -1307,6 +1354,7 @@ class Ui_MainWindow(object):
         self.ebooks_files.setAcceptDrops(True)
         self.ebooks_files.setLineWidth(1)
         self.ebooks_files.setAlternatingRowColors(True)
+        self.ebooks_files.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.ebooks_files.setGridStyle(QtCore.Qt.SolidLine)
         self.ebooks_files.setColumnCount(6)
         self.ebooks_files.setObjectName("ebooks_files")
@@ -1341,21 +1389,21 @@ class Ui_MainWindow(object):
         self.ebooks_addFiles.setMinimumSize(QtCore.QSize(56, 56))
         self.ebooks_addFiles.setMaximumSize(QtCore.QSize(56, 56))
         self.ebooks_addFiles.setStyleSheet("QPushButton {\n"
-                                           "    background-repeat: no-repeat;\n"
-                                           "    background-position: center center;\n"
-                                           "    background-image: url(:/image/add.png);\n"
-                                           "    border: none;\n"
-                                           "    border-radius: 3px;\n"
-                                           "}\n"
-                                           "QPushButton:enabled {\n"
-                                           "    background-color: #558b2f;\n"
-                                           "}\n"
-                                           "QPushButton:hover {\n"
-                                           "    background-color: #689f38;\n"
-                                           "}\n"
-                                           "QPushButton:pressed {\n"
-                                           "    background-color: #33691e;\n"
-                                           "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/add.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #558b2f;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #689f38;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #33691e;\n"
+"}")
         self.ebooks_addFiles.setText("")
         self.ebooks_addFiles.setIconSize(QtCore.QSize(5, 5))
         self.ebooks_addFiles.setFlat(True)
@@ -1371,24 +1419,24 @@ class Ui_MainWindow(object):
         self.ebooks_removeRows.setMinimumSize(QtCore.QSize(56, 56))
         self.ebooks_removeRows.setMaximumSize(QtCore.QSize(56, 56))
         self.ebooks_removeRows.setStyleSheet("QPushButton {\n"
-                                             "    background-repeat: no-repeat;\n"
-                                             "    background-position: center center;\n"
-                                             "    background-image: url(:/image/remove.png);\n"
-                                             "    border: none;\n"
-                                             "    border-radius: 3px;\n"
-                                             "}\n"
-                                             "QPushButton:disabled {\n"
-                                             "    background-image: url(:/image/remove-disabled.png);\n"
-                                             "}\n"
-                                             "QPushButton:enabled {\n"
-                                             "    background-color: #c62828;\n"
-                                             "}\n"
-                                             "QPushButton:hover {\n"
-                                             "    background-color: #d32f2f;\n"
-                                             "}\n"
-                                             "QPushButton:pressed {\n"
-                                             "    background-color: #b71c1c;\n"
-                                             "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/remove.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-image: url(:/image/remove-disabled.png);\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #c62828;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #d32f2f;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #b71c1c;\n"
+"}")
         self.ebooks_removeRows.setText("")
         self.ebooks_removeRows.setIconSize(QtCore.QSize(5, 5))
         self.ebooks_removeRows.setFlat(True)
@@ -1406,7 +1454,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.groupBox_3)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.formLayout_6 = QtWidgets.QFormLayout()
-        self.formLayout_6.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_6.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_6.setObjectName("formLayout_6")
         self.label_30 = QtWidgets.QLabel(self.groupBox_3)
         self.label_30.setObjectName("label_30")
@@ -1482,6 +1530,7 @@ class Ui_MainWindow(object):
         self.film_files.setAcceptDrops(True)
         self.film_files.setLineWidth(1)
         self.film_files.setAlternatingRowColors(True)
+        self.film_files.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.film_files.setGridStyle(QtCore.Qt.SolidLine)
         self.film_files.setColumnCount(7)
         self.film_files.setObjectName("film_files")
@@ -1517,21 +1566,21 @@ class Ui_MainWindow(object):
         self.film_addFiles.setMinimumSize(QtCore.QSize(56, 56))
         self.film_addFiles.setMaximumSize(QtCore.QSize(56, 56))
         self.film_addFiles.setStyleSheet("QPushButton {\n"
-                                         "    background-repeat: no-repeat;\n"
-                                         "    background-position: center center;\n"
-                                         "    background-image: url(:/image/add.png);\n"
-                                         "    border: none;\n"
-                                         "    border-radius: 3px;\n"
-                                         "}\n"
-                                         "QPushButton:enabled {\n"
-                                         "    background-color: #558b2f;\n"
-                                         "}\n"
-                                         "QPushButton:hover {\n"
-                                         "    background-color: #689f38;\n"
-                                         "}\n"
-                                         "QPushButton:pressed {\n"
-                                         "    background-color: #33691e;\n"
-                                         "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/add.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #558b2f;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #689f38;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #33691e;\n"
+"}")
         self.film_addFiles.setText("")
         self.film_addFiles.setIconSize(QtCore.QSize(5, 5))
         self.film_addFiles.setFlat(True)
@@ -1547,24 +1596,24 @@ class Ui_MainWindow(object):
         self.film_removeRows.setMinimumSize(QtCore.QSize(56, 56))
         self.film_removeRows.setMaximumSize(QtCore.QSize(56, 56))
         self.film_removeRows.setStyleSheet("QPushButton {\n"
-                                           "    background-repeat: no-repeat;\n"
-                                           "    background-position: center center;\n"
-                                           "    background-image: url(:/image/remove.png);\n"
-                                           "    border: none;\n"
-                                           "    border-radius: 3px;\n"
-                                           "}\n"
-                                           "QPushButton:disabled {\n"
-                                           "    background-image: url(:/image/remove-disabled.png);\n"
-                                           "}\n"
-                                           "QPushButton:enabled {\n"
-                                           "    background-color: #c62828;\n"
-                                           "}\n"
-                                           "QPushButton:hover {\n"
-                                           "    background-color: #d32f2f;\n"
-                                           "}\n"
-                                           "QPushButton:pressed {\n"
-                                           "    background-color: #b71c1c;\n"
-                                           "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/remove.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-image: url(:/image/remove-disabled.png);\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #c62828;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #d32f2f;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #b71c1c;\n"
+"}")
         self.film_removeRows.setText("")
         self.film_removeRows.setIconSize(QtCore.QSize(5, 5))
         self.film_removeRows.setFlat(True)
@@ -1577,7 +1626,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.horizontalGroupBox_3)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.formLayout_8 = QtWidgets.QFormLayout()
-        self.formLayout_8.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_8.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_8.setVerticalSpacing(4)
         self.formLayout_8.setObjectName("formLayout_8")
         self.label_44 = QtWidgets.QLabel(self.horizontalGroupBox_3)
@@ -1585,7 +1634,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_44.setFont(font)
-        self.label_44.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.label_44.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_44.setObjectName("label_44")
         self.formLayout_8.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_44)
         self.film_totalTime = QtWidgets.QLineEdit(self.horizontalGroupBox_3)
@@ -1645,7 +1694,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.setContentsMargins(9, 9, 9, 9)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.formLayout_7 = QtWidgets.QFormLayout()
-        self.formLayout_7.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_7.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_7.setObjectName("formLayout_7")
         self.label_38 = QtWidgets.QLabel(self.groupBox_4)
         font = QtGui.QFont()
@@ -1703,7 +1752,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.formLayout_9 = QtWidgets.QFormLayout()
-        self.formLayout_9.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_9.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_9.setObjectName("formLayout_9")
         self.label_40 = QtWidgets.QLabel(self.pagePC)
         font = QtGui.QFont()
@@ -1741,7 +1790,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.formLayout_10 = QtWidgets.QFormLayout()
-        self.formLayout_10.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_10.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_10.setObjectName("formLayout_10")
         self.con_type = QtWidgets.QComboBox(self.pageCon)
         self.con_type.setObjectName("con_type")
@@ -1792,12 +1841,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.formLayout_3 = QtWidgets.QFormLayout()
-        self.formLayout_3.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout_3.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_3.setObjectName("formLayout_3")
         self.label_20 = QtWidgets.QLabel(self.groupBox)
         font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setWeight(50)
         self.label_20.setFont(font)
         self.label_20.setObjectName("label_20")
         self.formLayout_3.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_20)
@@ -1816,8 +1865,8 @@ class Ui_MainWindow(object):
         self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.txt_relName)
         self.label_22 = QtWidgets.QLabel(self.groupBox)
         font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setWeight(50)
         self.label_22.setFont(font)
         self.label_22.setObjectName("label_22")
         self.formLayout_3.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_22)
@@ -1869,21 +1918,21 @@ class Ui_MainWindow(object):
         self.final_goBack.setMinimumSize(QtCore.QSize(33, 33))
         self.final_goBack.setMaximumSize(QtCore.QSize(33, 33))
         self.final_goBack.setStyleSheet("QPushButton {\n"
-                                        "    background-repeat: no-repeat;\n"
-                                        "    background-position: center center;\n"
-                                        "    background-image: url(:/image/back.png);\n"
-                                        "    border: none;\n"
-                                        "    border-radius: 3px;\n"
-                                        "}\n"
-                                        "QPushButton:enabled {\n"
-                                        "    background-color: #1565c0;\n"
-                                        "}\n"
-                                        "QPushButton:hover {\n"
-                                        "    background-color: #1976d2;\n"
-                                        "}\n"
-                                        "QPushButton:pressed {\n"
-                                        "    background-color: #0d47a1;\n"
-                                        "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/back.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #1565c0;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #1976d2;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #0d47a1;\n"
+"}")
         self.final_goBack.setText("")
         self.final_goBack.setIconSize(QtCore.QSize(33, 33))
         self.final_goBack.setFlat(True)
@@ -1906,22 +1955,22 @@ class Ui_MainWindow(object):
         self.final_genNFO.setMinimumSize(QtCore.QSize(33, 33))
         self.final_genNFO.setMaximumSize(QtCore.QSize(33, 33))
         self.final_genNFO.setStyleSheet("QPushButton {\n"
-                                        "    background-repeat: no-repeat;\n"
-                                        "    background-position: center center;\n"
-                                        "    background-image: url(:/image/download.png);\n"
-                                        "    border: none;\n"
-                                        "    border-radius: 3px;\n"
-                                        "    \n"
-                                        "}\n"
-                                        "QPushButton:enabled {\n"
-                                        "    background-color: #2e7d32;\n"
-                                        "}\n"
-                                        "QPushButton:hover {\n"
-                                        "    background-color: #388e3c;\n"
-                                        "}\n"
-                                        "QPushButton:pressed {\n"
-                                        "    background-color: #1b5e20;\n"
-                                        "}")
+"    background-repeat: no-repeat;\n"
+"    background-position: center center;\n"
+"    background-image: url(:/image/download.png);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"    \n"
+"}\n"
+"QPushButton:enabled {\n"
+"    background-color: #2e7d32;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #388e3c;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1b5e20;\n"
+"}")
         self.final_genNFO.setText("")
         self.final_genNFO.setIconSize(QtCore.QSize(33, 33))
         self.final_genNFO.setFlat(True)
@@ -1941,8 +1990,8 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
-        self.pages.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
+        self.pages.setCurrentIndex(3)
         self.audio_genre.setCurrentIndex(-1)
         self.audio_source.setCurrentIndex(0)
         self.ebook_langue.setCurrentIndex(-1)
@@ -1972,21 +2021,19 @@ class Ui_MainWindow(object):
         item = self.audio_files.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Nom du fichier"))
         item = self.audio_files.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Auteur"))
-        item = self.audio_files.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Titre"))
-        item = self.audio_files.horizontalHeaderItem(4)
+        item = self.audio_files.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Interprète(s)"))
+        item = self.audio_files.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Album"))
         item = self.audio_files.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Taille"))
         item = self.audio_files.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Année"))
-        item = self.audio_files.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "Genre"))
-        item = self.audio_files.horizontalHeaderItem(8)
         item.setText(_translate("MainWindow", "Durée"))
-        item = self.audio_files.horizontalHeaderItem(9)
+        item = self.audio_files.horizontalHeaderItem(7)
         item.setText(_translate("MainWindow", "Bitrate"))
+        item = self.audio_files.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "filename"))
         self.horizontalGroupBox_2.setTitle(_translate("MainWindow", "Infos"))
         self.label_3.setText(_translate("MainWindow", "Codec :"))
         self.label_8.setText(_translate("MainWindow", "Fréquence :"))
@@ -2757,10 +2804,10 @@ class Ui_MainWindow(object):
         self.app_os.setItemText(4, _translate("MainWindow", "Console"))
         self.label_46.setText(_translate("MainWindow", "Genre :"))
         self.label_40.setText(_translate("MainWindow", "Config. minimum :\n"
-                                                       "(ou version \n"
-                                                       "Android/iOS/WP \n"
-                                                       "min. si pour \n"
-                                                       "smartphone)"))
+"(ou version \n"
+"Android/iOS/WP \n"
+"min. si pour \n"
+"smartphone)"))
         self.label_41.setText(_translate("MainWindow", "Étapes d\'installation :"))
         self.con_type.setItemText(0, _translate("MainWindow", "Microsoft"))
         self.con_type.setItemText(1, _translate("MainWindow", "Nintendo"))
@@ -2773,9 +2820,7 @@ class Ui_MainWindow(object):
         self.label_21.setText(_translate("MainWindow", "Nom du torrent :"))
         self.label_22.setText(_translate("MainWindow", "Description :"))
         self.label_14.setText(_translate("MainWindow", "Taille totale :"))
-        self.label_47.setText(_translate("MainWindow",
-                                         "<html><head/><body><p><span style=\" color:#ff0000;\">Les champs en </span><span style=\" font-weight:600; color:#ff0000;\">gras</span><span style=\" color:#ff0000;\"> sont obligatoires</span></p></body></html>"))
+        self.label_47.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" color:#ff0000;\">Les champs en </span><span style=\" font-weight:600; color:#ff0000;\">gras</span><span style=\" color:#ff0000;\"> sont obligatoires</span></p></body></html>"))
         self.lbl_pageTitle_2.setText(_translate("MainWindow", "Aperçu du NFO"))
-
 
 import images_rc

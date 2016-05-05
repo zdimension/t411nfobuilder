@@ -4,9 +4,22 @@ from PyQt5.QtGui import *
 from tnb_gui import Ui_MainWindow
 import os
 import datetime
+import collections
 import textwrap
+from pymediainfo import MediaInfo
+# http://stackoverflow.com/a/1520716/2196124
+def most_common(L):
+  counts = collections.Counter(L)
+  return counts.most_common(1)[0][0]
 
 __version__ = "0.2"
+
+
+def round1or0(n):
+    g = "%.1f" % n
+    if ".0" in g:
+        return "%.0f" % n
+    return g
 
 
 def get_size(start_path='.'):
@@ -18,12 +31,14 @@ def get_size(start_path='.'):
     return total_size
 
 
-def sizeof_fmt(num, suffix='o'):
-    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
-        if abs(num) < 1024.0:
-            return "%3.1f %s%s" % (num, unit, suffix)
-        num /= 1024.0
-    return "%.1f %s%s" % (num, 'Yi', suffix)
+def sizeof_fmt(num, suffix='o', un=1024.0):
+    un = float(un)
+    pref = ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi'] if un == 1024.0 else ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z']
+    for unit in pref:
+        if abs(num) < un:
+            return round1or0(num) + " %s%s" % (unit, suffix)
+        num /= un
+    return round1or0(num) + " %s%s" % ('Yi' if un == 1024.0 else 'Y', suffix)
 
 
 def sztxt(p):
@@ -71,12 +86,129 @@ class myMainWindow(QMainWindow):
             event.accept()
 
 
+def is_ascii(s):
+    return s is not None and all(ord(c) < 128 for c in s)
+
+
+def loadGenres():
+    genres = ["2 Tone", "2-step garage", "A cappella", "Acid blues", "Acid breaks", "Acid house", "Acid jazz",
+              "Acid rock", "Acid techno", "Acid trance", "Acidcore", "Adult contemporary", "Afrobeat", "Afropop",
+              "Allaoui", "Ambient", "Ambient house", "Ambient jungle", "Ambient techno", "Americana", "Anarcho-punk",
+              "Anti-folk", "Arena rock", "Art punk", "Art rock", "Austropop", "Avant-garde jazz", "Avanthop", "Axé",
+              "Bachata", "Bachatango", "Baggy", "Baile funk", "Bakersfield sound", "Balearic beat", "Balearic trance",
+              "Ballade", "Ballet", "Baltimore club", "Bass music", "Bassline", "Bay Area thrash metal", "Beat", "Bebop",
+              "Berceuse", "Big band", "Big beat", "Biguine", "Black metal", "Black metal norvégien",
+              "Black metal symphonique", "Bluegrass", "Blues", "Blues africain", "Blues rock", "Blues touareg",
+              "Blues traditionnel", "Blues électrique", "Boléro", "Boogaloo", "Boogie-woogie", "Bossa nova",
+              "Bounce music", "Brass band", "Breakbeat", "Breakbeat hardcore", "Breakcore", "Britpop", "Broken beat",
+              "Brutal death metal", "Bubblegum pop", "C-pop", "C86", "Calypso", "Cantopop", "CCM", "Cello rock",
+              "Cha-cha-cha", "Changüí", "Chanson française", "Chant grégorien", "Chaâbi algérien", "Chaâbi marocain",
+              "Chicago blues", "Chicago house", "Chillstep", "Chiptune", "Classic rag", "Cloud rap", "Cold wave",
+              "College rock", "Concerto", "Contradanza", "Cool jazz", "Country", "Country folk",
+              "Country néo traditionnelle", "Country pop", "Country rap", "Country rock", "Country soul", "Cowpunk",
+              "Crossover", "Crossover thrash", "Crunk", "Crunk'n'b", "Crunkcore", "Crust punk", "Cumbia", "D-beat",
+              "Dance", "Dance-pop", "Dance-punk", "Dance-rock", "Dancehall", "Dangdut", "Danzón", "Dark ambient",
+              "Dark metal", "Dark psytrance", "Dark wave", "Dark wave néo-classique", "Darkcore", "Darkstep",
+              "Death 'n' roll", "Death metal", "Death metal mélodique", "Death metal technique", "Death rock",
+              "Death-doom", "Deathcore", "Deathcountry", "Deathgrind", "Deep house", "Deepkho", "Delta blues",
+              "Detroit blues", "Digital hardcore", "Dirty South", "Disco", "Disco house", "Diva house", "Dixieland",
+              "Djent", "Doo-wop", "Doom metal", "Downtempo", "Dream pop", "Dream trance", "Drill", "Drill and bass",
+              "Drum and bass", "Drumfunk", "Drumstep", "Dub", "Dub poetry", "Dubstep", "Dunedin sound",
+              "Early hardcore", "Easycore", "EBM", "Electro", "Electro house", "Electro swing", "Electroclash",
+              "Electronic body music", "Electronica", "Electronicore", "Electropop", "Electropunk", "Emo", "Emo pop",
+              "Éthio-jazz", "Ethno-jazz", "Euro disco", "Eurobeat", "Eurodance", "Europop", "Extratone", "Fado",
+              "Fanfare", "Filin", "Flamenco", "Folk", "Folk metal", "Folk progressif", "Folk psychédélique",
+              "Folk rock", "Foxtrot", "Freakbeat", "Free jazz", "Freeform hardcore", "Freestyle", "French touch",
+              "Frenchcore", "Fun-punk", "Funk", "Funk metal", "Funk rock", "Funktronica", "Funky house",
+              "Future garage", "Future house", "G-funk", "Gabber", "Gaelic punk", "Gangsta rap", "Garage house",
+              "Garage punk", "Garage rock", "Geek rock", "Ghetto house", "Ghettotech", "Glam metal", "Glam punk",
+              "Glam rock", "Glitch", "Glitch-hop", "Goa", "Goregrind", "Gospel", "Gospel blues", "Gothabilly", "Grebo",
+              "Grime", "Grindcore", "Grindie", "Groove metal", "Grunge", "Guajira", "Guaracha", "Gypsy punk", "Handsup",
+              "Happy gabber", "Happy hardcore", "Hard bop", "Hard house", "Hard rock", "Hard trance", "Hardbag",
+              "Hardcore", "Hardcore chrétien", "Hardcore mélodique", "Hardstep", "Hardstyle", "Hardtechno",
+              "Heartland rock", "Heavy metal", "Heavy metal traditionnel", "Hi-NRG", "Hip-hop", "Hip-hop alternatif",
+              "Hip-hop chrétien", "Hip-hop expérimental", "Hip-hop orchestral", "Hip-hop psychédélique", "Hip-house",
+              "Hiplife", "Hipster-hop", "Honky tonk", "Horror punk", "Horrorcore", "House", "House progressive", "IDM",
+              "Illbient", "Indie dance", "Indie folk", "Indie pop", "Industrial hardcore", "Intelligent dance music",
+              "Italo dance", "Italo disco", "Italo house", "J-core", "J-pop", "J-rock", "Jangle pop", "Jazz",
+              "Jazz afro-cubain", "Jazz blues", "Jazz fusion", "Jazz manouche", "Jazz modal", "Jazz Nouvelle-Orléans",
+              "Jazz punk", "Jazz rap", "Jazz vocal", "Jazz West Coast", "Jazz-funk", "Jazz-rock", "Jazzstep",
+              "Jump blues", "Jump-up", "Jumpstyle", "Jungle", "K-pop", "Kaneka", "Kansas City blues", "Kizomba",
+              "Klezmer", "Kompa", "Krautrock", "Kuduro", "Kwaito", "Latin house", "Latin jazz", "Latin metal",
+              "Lento violento", "Liquid funk", "Livetronica", "Lo-fi", "Logobi", "Louisiana blues", "Lounge",
+              "Luk thung", "Madchester", "Mainstream", "Mainstream hardcore", "Makina", "Maloya", "Mambo", "Mandopop",
+              "Mangue beat", "Marche", "Mashup", "Math rock", "Mathcore", "Mbalax", "Medieval rock", "Memphis blues",
+              "Merengue", "Merenhouse", "Metal alternatif", "Metal avant-gardiste", "Metal celtique", "Metal chrétien",
+              "Metal extrême", "Metal gothique", "Metal industriel", "Metal néo-classique", "Metal oriental",
+              "Metal progressif", "Metal symphonique", "Metalcore", "Metalcore mélodique", "Miami bass", "Microhouse",
+              "Midwest rap", "Milonga", "Minneapolis Sound", "Moombahcore", "Moombahton", "Mozambique", "MPB", "Murga",
+              "Musette", "Musique 8-bit", "Musique alternative", "Musique bretonne", "Musique bruitiste",
+              "Musique cadienne", "Musique celtique", "Musique chrétienne contemporaine", "Musique classique",
+              "Musique concrète", "Musique cubaine", "Musique expérimentale", "Musique gothique",
+              "Musique industrielle", "Musique instrumentale", "Musique irlandaise", "Musique latine",
+              "Musique minimaliste", "Musique post-industrielle", "Musique progressive", "Musique romantique",
+              "Musique spectrale", "Musique électroacoustique", "Musique électronique", "Musique émergente",
+              "Musiqur Cajun", "Música Popular Brasileira", "Nardcore", "Nashville sound",
+              "National socialist black metal", "Nazi punk", "Nederpop", "Negro spiritual", "Neo soul",
+              "Neo-psychedelia", "Nerdcore", "Neue Deutsche Härte", "Neue Deutsche Welle", "Neurofunk", "New age",
+              "New beat", "New jack swing", "New prog", "New wave", "New Wave of American Heavy Metal",
+              "New Wave of British Heavy Metal", "New York blues", "New York hardcore", "Nintendocore", "No wave",
+              "Nocturne", "Noise music", "Noise pop", "Noise rock", "Northern soul", "NSBM", "Nu jazz", "Nu metal",
+              "Nu-disco", "Nu-NRG", "Nueva Trova", "NWOAHM", "NWOBHM", "Néo-bop", "Néo-classicisme", "Néo-trad",
+              "Néofolk", "Oi ", "Old-time", "Opéra", "Opéra-rock", "Oratorio", "Outlaw country", "Pachanga",
+              "Paisley Underground", "Paso doble", "Piano blues", "Piano rock", "Piano stride", "Piedmont blues",
+              "Pirate metal", "Polonaise", "Pop", "Pop baroque", "Pop latino", "Pop metal", "Pop progressive",
+              "Pop psychédélique", "Pop punk", "Pop rock", "Pop-rap", "Pornogrind", "Post-bop", "Post-disco",
+              "Post-grunge", "Post-hardcore", "Post-metal", "Post-punk", "Post-rock", "Power ballad", "Power metal",
+              "Power pop", "Powerviolence", "Protopunk", "Prélude", "Psychobilly", "Psytrance", "Pub rock",
+              "Punk blues", "Punk celtique", "Punk chrétien", "Punk folk", "Punk hardcore", "Punk rock", "Punta rock",
+              "Punto guajiro", "Queercore", "Quiet storm", "Rabiz", "RAC", "Raga rock", "Ragga", "Ragtime",
+              "Rap East Coast", "Rap hardcore", "Rap metal", "Rap old school", "Rap politique", "Rap rock",
+              "Rap West Coast", "Rapcore", "Rave", "Raï", "Raï'n'B", "Rebetiko", "Red Dirt", "Reggae", "Reggae fusion",
+              "Reggaecrunk", "Reggaetón", "Rhapsodie", "Rhythm and blues", "RIO", "Riot grrrl", "RnB contemporain",
+              "Rock", "Rock 'n' roll", "Rock alternatif", "Rock alternatif latino", "Rock anticommuniste",
+              "Rock brésilien", "Rock canadien", "Rock celtique", "Rock chilien", "Rock chinois", "Rock chrétien",
+              "Rock communiste", "Rock en espagnol", "Rock expérimental", "Rock gothique", "Rock in Opposition",
+              "Rock industriel", "Rock indépendant", "Rock instrumental", "Rock néo-progressif", "Rock progressif",
+              "Rock psychédélique", "Rock sudiste", "Rock suédois", "Rock symphonique", "Rock turc", "Rock wagnérien",
+              "Rock électronique", "Rockabilly", "Rocksteady", "Rondo", "Roots rock", "Rumba", "Rumba catalane",
+              "Rumba congolaise", "Rumba flamenca", "Sadcore", "Saint Louis blues", "Salegy", "Salsa", "Salsa-ragga",
+              "Salsaton", "Samba", "Samba rock", "Sambass", "Scherzo", "Schranz", "Screamo", "Seggae", "Semba",
+              "Shibuya-kei", "Shock rock", "Shoegazing", "Ska", "Ska punk", "Ska-jazz", "Skate punk", "Slam", "Slow",
+              "Slow fox", "Slowcore", "Sludge metal", "Smooth jazz", "Snap", "Soca", "Soft rock", "Son cubain",
+              "Sonate", "Songo", "Sophisti-pop", "Soukous", "Soul", "Soul blues", "Soul jazz", "Soul psychédélique",
+              "Southern gospel", "Space rock", "Speed garage", "Speed metal", "Speedcore", "Splittercore",
+              "Stoner rock", "Street punk", "Sunshine pop", "Surf", "Swamp blues", "Swamp pop", "Swing", "Symphonie",
+              "Synthpop", "Synthpunk", "Synthwave", "Séga", "T-pop", "Tango", "Taqwacore", "Tarentelle", "Tech house",
+              "Tech trance", "Techno", "Techno de Détroit", "Techno hardcore", "Techno minimale", "Technopop",
+              "Techstep", "Tecno-brega", "Teen pop", "Terrorcore", "Texas blues", "Thrash metal",
+              "Thrash metal allemand", "Thrashcore", "Timba", "Toccata", "Trallpunk", "Trance", "Trance psychédélique",
+              "Trance vocale", "Trap", "Tribal house", "Tribe", "Trip hop", "Tropical house", "Tropipop",
+              "Tumba francesa", "Twee pop", "UK garage", "UK hardcore", "Unblack metal", "Uplifting trance",
+              "Vaporwave", "Viking metal", "Visual kei", "Vocal house", "West Coast blues", "Western Swing",
+              "Witch house", "Wizard rock", "Wonky", "Wonky pop", "World music", "Youth crew", "Yéla", "Yéyé", "Zarico",
+              "Zeuhl", "Ziglibithy", "Zouglou", "Zouk", "Zumba", "Zydeco"]
+    ui.audio_genre.addItems(genres)
+    ui.audio_genre.setCurrentIndex(-1)
+
+
+audiofnames = []
+
+
+def audioRemoveRows():
+    for r in ui.audio_files.selectionModel().selectedRows():
+        audiofnames.remove(ui.audio_files.item(r.row(), 8).text())
+    audio_updateFiles()
+
 def initUi():
     ui.con_type.currentIndexChanged.connect(lambda index: loadCon(index))
     ui.con_console.currentIndexChanged.connect(lambda index: firmV(ui.con_type.currentIndex() == 2 and index in [2, 4]))
     ui.ebook_format.currentIndexChanged.connect(lambda index: ebookdim(index in [1, 2, 3, 4, 5, 9, 12]))
     ui.app_os.currentIndexChanged.connect(lambda index: setAppGame(index == 4))
     ui.app_swCon.setCurrentIndex(0)
+
+    audiofnames = []
+    ui.audio_files.setColumnHidden(8, True)
 
     ui.btnAppli.clicked.connect(lambda: goto(4, "Application"))
     ui.btnAudio.clicked.connect(lambda: goto(0, "Audio"))
@@ -94,10 +226,17 @@ def initUi():
 
     ui.final_goBack.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(1))
 
+    ui.audio_isVariousArtists.stateChanged.connect(lambda: ui.audio_variousArtists.setEnabled(ui.audio_isVariousArtists.isChecked()))
+
+    ui.audio_files.itemSelectionChanged.connect(lambda: ui.audio_removeRows.setEnabled(len(ui.audio_files.selectedItems()) > 0))
+
+    ui.audio_removeRows.clicked.connect(audioRemoveRows)
+
+    loadGenres()
+
     ebookdim(False)
 
     firmV(False)
-
     ui.stackedWidget.setCurrentIndex(0)
     window.setWindowTitle("t411 NFO Builder " + __version__)
     ui.label.setText("t411 NFO Builder " + __version__)
@@ -178,20 +317,105 @@ def goto(id, name=""):
 
 
 def path_leaf(path):
-    return splitext(basename(path))[0]
+    return os.path.splitext(os.path.basename(path))[0]
+
+
+def durationToText(dur):
+    return repr(dur // 60) + ":" + repr(dur % 60).zfill(2)
+
+
+def textToDuration(dur):
+    spl = dur.split(":")
+    return int(spl[0]) * 60 + int(spl[1])
+
+
+def average(arr, emp=-1):
+    if len(arr) == 0: return emp
+    return sum(arr) / float(len(arr))
 
 
 def audio_addFiles():
     dialog = QFileDialog()
     dialog.setFileMode(QFileDialog.ExistingFiles)
-    fnames = dialog.getOpenFileNames(None, "Fichiers audio", os.path.expanduser("~"),
+    fn = dialog.getOpenFileNames(None, "Fichiers audio", os.path.expanduser("~"),
                                      "Fichiers audio (*.aac *.ac3 *.aif *.alac *.flac *.ape *.m4a *.mp3 *.mpc *.ogg *.wav *.wv *.wma)")[
         0]
-    for file in fnames:
-        if (isfile(file)):
+    for file in fn:
+        if file in audiofnames:
+            msg = QMessageBox()
+            msg.setWindowTitle("t411 NFO Builder")
+            msg.setIcon(QMessageBox.Critical)
+            msg.setStyle(DEFAULT_STYLE)
+            msg.setWindowIcon(QIcon(":/image/icon.png"))
+            msg.setText("Le fichier '" + file + "' a déjà été ajouté.")
+            msg.exec_()
+        else:
+            audiofnames.append(file)
+    audio_updateFiles()
+
+
+class ROTableItem(QTableWidgetItem):
+    def __init__(self, __args):
+        QTableWidgetItem.__init__(self, __args)
+        self.setFlags(self.flags() & ~2)
+
+
+def audio_updateFiles():
+    dSum = 0
+    sSum = 0
+    codecs = []
+    brates = []
+    chan = 0
+    enc = []
+    genres = []
+    freqs = []
+    year = -1
+    while ui.audio_files.rowCount() > 0:
+        ui.audio_files.removeRow(0) # Vider le tableau
+    for file in audiofnames:
+        if (os.path.isfile(file)):
             rowPos = ui.audio_files.rowCount()
             ui.audio_files.insertRow(rowPos)
-            ui.audio_files.setItem(rowPos, 1, QTableWidgetItem(path_leaf(file)))
+            ui.audio_files.setItem(rowPos, 8, QTableWidgetItem(file))
+            ui.audio_files.setItem(rowPos, 1, QTableWidgetItem(os.path.basename(file)))  # Nom du fichier
+            mediaInfo = MediaInfo.parse(file)
+            track = mediaInfo.tracks[0]
+            audioTrack = mediaInfo.tracks[1]
+            freqs.append(audioTrack.sampling_rate)
+            chan = audioTrack.channel_s
+            codecs.append(audioTrack.other_codec[0])
+            lib = track.writing_library
+            if is_ascii(lib) and not "=" in lib and len(lib) < 32:
+                enc.append(lib)
+            itemN = QTableWidgetItem()
+            itemN.setData(0, int(track.track_name_position))
+            ui.audio_files.setItem(rowPos, 0, itemN)  # N°
+            ui.audio_files.setItem(rowPos, 2, QTableWidgetItem(track.track_name))  # Titre
+            ui.audio_files.setItem(rowPos, 3, QTableWidgetItem(track.performer))  # Interprète(s)
+            ui.audio_files.setItem(rowPos, 4, QTableWidgetItem(track.album))  # Album
+            size = os.path.getsize(file)
+            sSum += size
+            ui.audio_files.setItem(rowPos, 5, ROTableItem(sizeof_fmt(size)))  # Taille
+            year = track.recorded_date
+            if track.genre is not None: genres.append(track.genre)
+            if track.duration is not None:
+                duree = track.duration / 1000
+                dSum += duree
+                ui.audio_files.setItem(rowPos, 6, ROTableItem(durationToText(int(duree))))  # Durée
+            brate = track.overall_bit_rate
+            if brate is not None:
+                brates.append(brate)
+                ui.audio_files.setItem(rowPos, 7, ROTableItem(sizeof_fmt(brate, 'bps', 1000)))  # Bitrate
+    ui.audio_files.sortByColumn(0, 0)
+    ui.audio_totalTime.setText(durationToText(int(dSum)))
+    ui.txt_totalSize.setText(sizeof_fmt(sSum))
+    if year is not None: ui.audio_year.setValue(int(year))
+    ui.audio_codec.setText(", ".join(set(codecs)))
+    ui.audio_channel.setText(repr(chan))
+    ui.audio_encoder.setText(most_common(enc))
+    ui.audio_genre.setCurrentText(", ".join(set(genres)))
+    ui.audio_avrBitrate.setText(sizeof_fmt(average(brates), 'bps', 1000))
+    ui.audio_freq.setText(sizeof_fmt(most_common(freqs), 'Hz', 1000))
 
 
 def app_browse():
@@ -298,9 +522,7 @@ def validate():
 
     # Infos up
     required[ui.txt_relName] = "Nom du torrent"
-    required[ui.txt_upName] = "Uploader"
     required[ui.txt_totalSize] = "Taille totale"
-    required[ui.txt_relNotes] = "Description"
 
     req = [("<li>&nbsp;&nbsp;" + v + "</li>") for (k, v) in required.items() if
            (fisEmpty(k) and k.isVisible() and k.isEnabled())]
@@ -334,6 +556,7 @@ def genNFO():
     cur = getCurPage()
 
     if cur == 0:  # Audio
+        nfo += getHeader("Infos audio")
         nfo += getFields(
             {
                 "Codec": ui.audio_codec.text(),
@@ -345,6 +568,7 @@ def genNFO():
                 "Durée totale": ui.audio_totalTime.text(),
             }
         )
+        nfo += getHeader("Liste des p ")
     elif cur == 1:  # eBook
         nfo += getFields(
             {
