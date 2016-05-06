@@ -7,12 +7,18 @@ import datetime
 import collections
 import textwrap
 from pymediainfo import MediaInfo
+from collections import OrderedDict
+import re
+
+
 # http://stackoverflow.com/a/1520716/2196124
 def most_common(L):
-  counts = collections.Counter(L)
-  return counts.most_common(1)[0][0]
+    if len(L) == 0: return None
+    counts = collections.Counter(L)
+    return counts.most_common(1)[0][0]
 
-__version__ = "0.2"
+
+__version__ = "0.3"
 
 
 def round1or0(n):
@@ -20,6 +26,13 @@ def round1or0(n):
     if ".0" in g:
         return "%.0f" % n
     return g
+
+
+def orValue(l, v):
+    try:
+        return l()
+    except:
+        return v
 
 
 def get_size(start_path='.'):
@@ -73,6 +86,9 @@ def firmV(v):
 
 class myMainWindow(QMainWindow):
     def closeEvent(self, event):
+        if ui.stackedWidget.currentIndex() == 0:
+            event.accept()
+            return
         msg = QMessageBox()
         msg.setWindowTitle("t411 NFO Builder")
         msg.setIcon(QMessageBox.Question)
@@ -200,6 +216,17 @@ def audioRemoveRows():
         audiofnames.remove(ui.audio_files.item(r.row(), 8).text())
     audio_updateFiles()
 
+
+def setNMR(nmr):
+    ui.audio_ripper.setEnabled(not nmr)
+    ui.audio_cdmodel.setEnabled(not nmr)
+    ui.audio_source.setEnabled(not nmr)
+    if nmr:
+        ui.audio_ripper.setText("")
+        ui.audio_cdmodel.setText("")
+        ui.audio_source.setCurrentIndex(-1)
+
+
 def initUi():
     ui.con_type.currentIndexChanged.connect(lambda index: loadCon(index))
     ui.con_console.currentIndexChanged.connect(lambda index: firmV(ui.con_type.currentIndex() == 2 and index in [2, 4]))
@@ -226,11 +253,12 @@ def initUi():
 
     ui.final_goBack.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(1))
 
-    ui.audio_isVariousArtists.stateChanged.connect(lambda: ui.audio_variousArtists.setEnabled(ui.audio_isVariousArtists.isChecked()))
-
-    ui.audio_files.itemSelectionChanged.connect(lambda: ui.audio_removeRows.setEnabled(len(ui.audio_files.selectedItems()) > 0))
+    ui.audio_files.itemSelectionChanged.connect(
+        lambda: ui.audio_removeRows.setEnabled(len(ui.audio_files.selectedItems()) > 0))
 
     ui.audio_removeRows.clicked.connect(audioRemoveRows)
+
+    ui.audio_notMyRip.stateChanged.connect(lambda: setNMR(ui.audio_notMyRip.isChecked()))
 
     loadGenres()
 
@@ -338,7 +366,7 @@ def audio_addFiles():
     dialog = QFileDialog()
     dialog.setFileMode(QFileDialog.ExistingFiles)
     fn = dialog.getOpenFileNames(None, "Fichiers audio", os.path.expanduser("~"),
-                                     "Fichiers audio (*.aac *.ac3 *.aif *.alac *.flac *.ape *.m4a *.mp3 *.mpc *.ogg *.wav *.wv *.wma)")[
+                                 "Fichiers audio (*.aac *.ac3 *.aif *.alac *.flac *.ape *.m4a *.mp3 *.mpc *.ogg *.wav *.wv *.wma)")[
         0]
     for file in fn:
         if file in audiofnames:
@@ -360,6 +388,21 @@ class ROTableItem(QTableWidgetItem):
         self.setFlags(self.flags() & ~2)
 
 
+def chanTxt(ch):
+    c = int(ch)
+    if c == 2:
+        return "2 (Stéréo)"
+    elif c == 4:
+        return "4 (Quadriphonie"
+    elif c == 6:
+        return "6 (Surround 5.1"
+    elif c == 8:
+        return "8 (Surround 7.1)"
+    elif c == 10:
+        return "10 (Surround 9.1"
+    return ch
+
+
 def audio_updateFiles():
     dSum = 0
     sSum = 0
@@ -371,7 +414,20 @@ def audio_updateFiles():
     freqs = []
     year = -1
     while ui.audio_files.rowCount() > 0:
-        ui.audio_files.removeRow(0) # Vider le tableau
+        ui.audio_files.removeRow(0)  # Vider le tableau
+    if len(audiofnames) == 0:
+        # Tout vider
+        ui.audio_totalTime.setText("")
+        ui.txt_totalSize.setText("")
+        ui.audio_year.setValue(-1)
+        ui.audio_codec.setText("")
+        ui.audio_channel.setText("")
+        ui.audio_encoder.setText("")
+        ui.audio_genre.setCurrentIndex(-1)
+        ui.audio_avrBitrate.setText("")
+        ui.audio_freq.setText("")
+        return
+
     for file in audiofnames:
         if (os.path.isfile(file)):
             rowPos = ui.audio_files.rowCount()
@@ -387,12 +443,21 @@ def audio_updateFiles():
             lib = track.writing_library
             if is_ascii(lib) and not "=" in lib and len(lib) < 32:
                 enc.append(lib)
+            titre = path_leaf(file) if track.track_name is None else track.track_name
             itemN = QTableWidgetItem()
-            itemN.setData(0, int(track.track_name_position))
+            if track.track_name_position is not None:
+                itemN.setData(0, int(track.track_name_position))
+            else:
+                rx = re.match("(?: *)(\d+)(?: *)(?:[-:]*)(?: *)(.*)(?: *)", titre)
+                if rx is not None and len(rx.groups()) == 2:
+                    itemN.setData(0, int(rx.group(1)))
+                    titre = rx.group(2)
+            ui.audio_files.setItem(rowPos, 2, QTableWidgetItem(titre))  # Titre
             ui.audio_files.setItem(rowPos, 0, itemN)  # N°
-            ui.audio_files.setItem(rowPos, 2, QTableWidgetItem(track.track_name))  # Titre
-            ui.audio_files.setItem(rowPos, 3, QTableWidgetItem(track.performer))  # Interprète(s)
-            ui.audio_files.setItem(rowPos, 4, QTableWidgetItem(track.album))  # Album
+            ui.audio_files.setItem(rowPos, 3, QTableWidgetItem(
+                "[Inconnu]" if track.performer is None else track.performer))  # Interprète(s)
+            ui.audio_files.setItem(rowPos, 4,
+                                   QTableWidgetItem("[Inconnu]" if track.album is None else track.album))  # Album
             size = os.path.getsize(file)
             sSum += size
             ui.audio_files.setItem(rowPos, 5, ROTableItem(sizeof_fmt(size)))  # Taille
@@ -406,12 +471,25 @@ def audio_updateFiles():
             if brate is not None:
                 brates.append(brate)
                 ui.audio_files.setItem(rowPos, 7, ROTableItem(sizeof_fmt(brate, 'bps', 1000)))  # Bitrate
+
+    albums = set(
+        [orValue(lambda: ui.audio_files.item(r, 4).text(), "[Inconnu]") for r in range(0, ui.audio_files.rowCount())])
+    if len(albums) == 2 and "[Inconnu]" in albums:
+        other = [a for a in albums if a != "[Inconnu]"][0]
+        for r in range(0, ui.audio_files.rowCount()):
+            ui.audio_files.setItem(r, 4, QTableWidgetItem(other))
+    performers = set(
+        [orValue(lambda: ui.audio_files.item(r, 3).text(), "[Inconnu]") for r in range(0, ui.audio_files.rowCount())])
+    if len(albums) == 2 and "[Inconnu]" in albums:
+        other = [a for a in performers if a != "[Inconnu]"][0]
+        for r in range(0, ui.audio_files.rowCount()):
+            ui.audio_files.setItem(r, 3, QTableWidgetItem(other))
     ui.audio_files.sortByColumn(0, 0)
     ui.audio_totalTime.setText(durationToText(int(dSum)))
     ui.txt_totalSize.setText(sizeof_fmt(sSum))
     if year is not None: ui.audio_year.setValue(int(year))
     ui.audio_codec.setText(", ".join(set(codecs)))
-    ui.audio_channel.setText(repr(chan))
+    ui.audio_channel.setText(chanTxt(chan))
     ui.audio_encoder.setText(most_common(enc))
     ui.audio_genre.setCurrentText(", ".join(set(genres)))
     ui.audio_avrBitrate.setText(sizeof_fmt(average(brates), 'bps', 1000))
@@ -446,7 +524,7 @@ def centerStr(str, length):
 
 
 def getHeader(str, sym="-", add=0):
-    return sym * (82 + add) + "\n" + centerStr(str, 82 + add) + "\n" + sym * (82 + add) + "\n"
+    return sym * (82 + add) + "\n" + centerStr(str, 82 + add) + "\n" + sym * (82 + add) + "\n\n"
 
 
 def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True):
@@ -491,7 +569,7 @@ def fisEmpty(field):
 
 def validate():
     cur = getCurPage()
-    from collections import OrderedDict
+
     required = OrderedDict()
 
     if cur == 0:  # Audio
@@ -540,9 +618,7 @@ def validate():
 
 
 def genNFO():
-    # if not validate():
-    #    return
-
+    if not validate(): return
 
     nfoTop = ""
     nfoTop += "+----------------------------------------------------------------------------------------+\n"
@@ -551,24 +627,74 @@ def genNFO():
 
     nfo = ""
     nfo += getHeader(ui.txt_relName.text(), "*", 2)
-    nfo += "\n"
 
     cur = getCurPage()
 
     if cur == 0:  # Audio
         nfo += getHeader("Infos audio")
-        nfo += getFields(
-            {
-                "Codec": ui.audio_codec.text(),
-                "Fréquence": ui.audio_freq.text(),
-                "Canaux": ui.audio_channel.text(),
-                "Encodeur": ui.audio_encoder.text(),
-                "Bitrate moyen": ui.audio_avrBitrate.text(),
-                "Genre": ui.audio_genre.currentText(),
-                "Durée totale": ui.audio_totalTime.text(),
-            }
-        )
-        nfo += getHeader("Liste des p ")
+        nfo += getFields(OrderedDict([
+            ("Interprète(s)",
+             ", ".join(set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())]))),
+            ("Album(s)", "Discographie" if ui.audio_discographie.isChecked() else ", ".join(
+                set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())]))),
+            ("Codec", ui.audio_codec.text()),
+            ("Fréquence", ui.audio_freq.text()),
+            ("Canaux", ui.audio_channel.text()),
+            ("Encodeur", ui.audio_encoder.text()),
+            ("Bitrate moyen", ui.audio_avrBitrate.text()),
+            ("Genre", ui.audio_genre.currentText()),
+            ("Durée totale", ui.audio_totalTime.text()),
+            ("Année", ui.audio_year.text()),
+            ("Tag ID3 1", ui.audio_id3tag_1.text()),
+            ("Tag ID3 2", ui.audio_id3tag_2.text()),
+            ("Tag APE", ui.audio_apeTag.text()),
+            ("Tag Vorbis", ui.audio_vorbisTag.text()),
+            ("Rippeur", "Not My Rip (Pas Mon Rip)" if ui.audio_notMyRip.isChecked() else ui.audio_ripper.text()),
+            ("Lecteur", ui.audio_cdmodel.text()),
+            ("Source", ui.audio_source.currentText()),
+        ]))
+
+        nfo += getHeader("Liste des pistes")
+        albums = set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())])
+        grouped = [(al, [r for r in range(0, ui.audio_files.rowCount()) if ui.audio_files.item(r, 4).text() == al]) for
+                   al in albums]
+
+        for album in grouped:
+            nfo += album[0] + "\n\n"
+            lastNum = 0
+            for rowID in album[1]:
+                tmp = ui.audio_files.item(rowID, 0).text()
+                lastNum = orValue(lambda: int(tmp), lastNum + 1)
+                h = (str(lastNum) + ". ").rjust(6)
+                v = ui.audio_files.item(rowID, 2).text()
+                curl = len(h)
+                rem = 82 - curl - 11
+
+                spc = " " * curl
+                nfo += h
+                i = 0
+                j = 0
+                v = v.ljust(rem)
+                dur = ui.audio_files.item(rowID, 6).text().rjust(7)
+                for c in v:
+                    if c == "\n" or i == rem:
+                        if j == 0:
+                            nfo += " [" + dur + "]"
+                        j = 1
+                        nfo += "\n"
+                        nfo += spc
+                        if c != "\n": nfo += c
+                        i = -1
+                    else:
+                        nfo += c
+                    i += 1
+                if j == 0:
+                    nfo += " [" + dur + "]"
+                nfo += "\n"
+            nfo += "\n"
+
+        nfo += "\n"
+
     elif cur == 1:  # eBook
         nfo += getFields(
             {

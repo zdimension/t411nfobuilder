@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -4234,27 +4234,33 @@ QPushButton:pressed {
                     <number>0</number>
                    </property>
                    <item row="0" column="1">
-                    <widget class="QCheckBox" name="audio_isVariousArtists">
+                    <widget class="QCheckBox" name="audio_discographie">
                      <property name="text">
-                      <string>Plusieurs artistes</string>
+                      <string>Discographie</string>
                      </property>
                     </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <spacer name="verticalSpacer_25">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>15</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                    <item row="2" column="1">
-                    <widget class="QLineEdit" name="audio_variousArtists">
-                     <property name="enabled">
-                      <bool>false</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="1">
                     <widget class="QCheckBox" name="audio_notMyRip">
                      <property name="text">
                       <string>NMR (Pas Mon Rip)</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="0">
+                   <item row="4" column="0">
                     <widget class="QLabel" name="label_4">
                      <property name="text">
                       <string>Rippeur :</string>
@@ -4264,10 +4270,23 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1">
+                   <item row="4" column="1">
                     <widget class="QLineEdit" name="audio_ripper"/>
                    </item>
-                   <item row="7" column="0">
+                   <item row="5" column="1">
+                    <spacer name="verticalSpacer_13">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>15</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="6" column="0">
                     <widget class="QLabel" name="label_5">
                      <property name="text">
                       <string>Lecteur:</string>
@@ -4277,10 +4296,23 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="7" column="1">
+                   <item row="6" column="1">
                     <widget class="QLineEdit" name="audio_cdmodel"/>
                    </item>
-                   <item row="9" column="0">
+                   <item row="7" column="1">
+                    <spacer name="verticalSpacer_14">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>15</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="8" column="0">
                     <widget class="QLabel" name="label_7">
                      <property name="text">
                       <string>Source :</string>
@@ -4290,16 +4322,16 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="9" column="1">
+                   <item row="8" column="1">
                     <widget class="QComboBox" name="audio_source">
                      <property name="editable">
                       <bool>true</bool>
                      </property>
                      <property name="currentText">
-                      <string>CD</string>
+                      <string/>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>-1</number>
                      </property>
                      <property name="frame">
                       <bool>true</bool>
@@ -4351,7 +4383,7 @@ QPushButton:pressed {
                      </item>
                     </widget>
                    </item>
-                   <item row="1" column="1">
+                   <item row="3" column="1">
                     <spacer name="verticalSpacer_11">
                      <property name="orientation">
                       <enum>Qt::Vertical</enum>
@@ -4359,46 +4391,7 @@ QPushButton:pressed {
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="3" column="1">
-                    <spacer name="verticalSpacer_12">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="6" column="1">
-                    <spacer name="verticalSpacer_13">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="8" column="1">
-                    <spacer name="verticalSpacer_14">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
+                       <height>15</height>
                       </size>
                      </property>
                     </spacer>
