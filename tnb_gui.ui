@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -449,7 +449,7 @@ QPushButton:pressed {
                  <enum>Qt::SolidLine</enum>
                 </property>
                 <property name="columnCount">
-                 <number>9</number>
+                 <number>10</number>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -503,6 +503,11 @@ QPushButton:pressed {
                 <column>
                  <property name="text">
                   <string>filename</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>brate</string>
                  </property>
                 </column>
                </widget>
@@ -5358,12 +5363,12 @@ QPushButton:pressed {
                 </column>
                 <column>
                  <property name="text">
-                  <string>Bitrate</string>
+                  <string>Bitrate vidéo</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>Bitrate total</string>
+                  <string>Pistes audio</string>
                  </property>
                 </column>
                </widget>
@@ -5531,8 +5536,8 @@ QPushButton:pressed {
                   <widget class="QLabel" name="label_43">
                    <property name="font">
                     <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
+                     <weight>50</weight>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="text">
@@ -5751,6 +5756,11 @@ QPushButton:pressed {
                      <string>Console</string>
                     </property>
                    </item>
+                   <item>
+                    <property name="text">
+                     <string>Console Rétro</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
                  <item row="3" column="0">
@@ -5768,7 +5778,7 @@ QPushButton:pressed {
                <item>
                 <widget class="QStackedWidget" name="app_swCon">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="pagePC">
                   <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -5867,21 +5877,6 @@ smartphone)</string>
                        <property name="currentIndex">
                         <number>-1</number>
                        </property>
-                       <item>
-                        <property name="text">
-                         <string>Microsoft</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>Nintendo</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>Sony</string>
-                        </property>
-                       </item>
                       </widget>
                      </item>
                      <item row="0" column="0">
@@ -5928,6 +5923,65 @@ smartphone)</string>
                         <string>Firmware :</string>
                        </property>
                       </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="pageRetro">
+                  <layout class="QHBoxLayout" name="horizontalLayout_14">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QFormLayout" name="formLayout_11">
+                     <property name="labelAlignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_36">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Constructeur :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QComboBox" name="retro_type">
+                       <property name="currentIndex">
+                        <number>-1</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_49">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Console :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QComboBox" name="retro_console"/>
                      </item>
                     </layout>
                    </item>

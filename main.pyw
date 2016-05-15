@@ -21,6 +21,23 @@ def most_common(L):
 __version__ = "0.3"
 
 
+def getThemedBox():
+    msg = QMessageBox()
+    msg.setWindowTitle("t411 NFO Builder")
+    msg.setStyle(DEFAULT_STYLE)
+    msg.setWindowIcon(QIcon(":/image/icon.png"))
+    return msg
+
+
+def checkArch(f):
+    if os.path.splitext(f)[1].lower() in [".zip", ".rar", ".7z"]:
+        msg = getThemedBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText("<h2>Attention !</h2><p>Les <b>fichiers archives</b> sont <b><font color='red'>interdits</font></b>.")
+        msg.exec_()
+        return True
+    return False
+
 def round1or0(n):
     g = "%.1f" % n
     if ".0" in g:
@@ -58,6 +75,49 @@ def sztxt(p):
     return sizeof_fmt(get_size(p))
 
 
+consoles = OrderedDict([
+    ("Microsoft", ["Xbox", "Xbox 360", "Xbox One"]),
+    ("Nintendo", ["3DS", "DS", "GameCube", "Wii", "Wii U"]),
+    ("Sony", ["PlayStation", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation Portable", "PlayStation Vita"])
+])
+
+
+consoles_retro = OrderedDict([
+    ("Amstrad", ["CPC", "GX-5000", "PCX"]),
+    ("Apple", ["I", "II", "III", "Macintosh", "PowerMac"]),
+    ("Atari", ["2600", "7800", "Falcon", "Jaguar", "Jaguar II", "Lynx", "Lynx II", "ST", "TT"]),
+    ("Coleco", ["Arcade", "Colecovision", "Colecovision Adam", "Gemini", "PlayPal", "Quiz Wiz"]),
+    ("Commodore", ["128", "64", "Amiga", "Amiga CD32", "Amiga CDTV", "C64"]),
+    ("GamePark", ["GP2X", "GP32", "GPI", "XGP"]),
+    ("Magnavox/Philips", ["CD-i", "Videopac"]),
+    ("Milton Bradley", ["Microvision", "Vectrex"]),
+    ("MSX", ["MSX"]),
+    ("NEC", ["CoreGrafX", "PC-Engine", "PC-FX", "SuperGrafX", "TurboGrafx"]),
+    ("Nintendo", ["Game Boy", "Game Boy Advance", "NES", "N64", "Super Nintendo", "Virtual Boy"]),
+    ("Nokia", ["N-Gage", "N-Gage QD"]),
+    ("Oric", ["Atmos", "Oric"]),
+    ("Origin", ["2000"]),
+    ("Sega", ["Dreamcast", "Game Gear", "Master System", "Megadrive", "Saturn"]),
+    ("Sinclair", ["ZX Spectrum", "ZX80", "ZX81"]),
+    ("SNK", ["Neo-Geo", "Neo-Geo Pocket"]),
+    ("The DO Company", ["DO"]),
+    ("Thomson", ["MO5", "TO16", "TO7", "TO8", "TO9"]),
+    ("VTech", ["V.Smile", "V.Smile Pocket"])
+])
+
+
+def loadCon():
+    ui.con_console.clear()
+    ui.con_console.addItems(consoles[ui.con_type.currentText()])
+    ui.con_console.setCurrentIndex(-1)
+
+
+def loadRetroCon():
+    ui.retro_console.clear()
+    ui.retro_console.addItems(consoles_retro[ui.retro_type.currentText()])
+    ui.retro_console.setCurrentIndex(-1)
+
+
 def ebookdim(v):
     if (v):
         ui.formLayout_5.insertRow(11, ui.lblDim, ui.ebook_dimensions)
@@ -89,11 +149,8 @@ class myMainWindow(QMainWindow):
         if ui.stackedWidget.currentIndex() == 0:
             event.accept()
             return
-        msg = QMessageBox()
-        msg.setWindowTitle("t411 NFO Builder")
+        msg = getThemedBox()
         msg.setIcon(QMessageBox.Question)
-        msg.setStyle(DEFAULT_STYLE)
-        msg.setWindowIcon(QIcon(":/image/icon.png"))
         msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
         msg.setDefaultButton(QMessageBox.No)
         msg.setText("Voulez-vous vraiment quitter ?\nToutes les modifications non sauvegardées seront perdues.")
@@ -209,7 +266,7 @@ def loadGenres():
 
 
 audiofnames = []
-
+videofnames = []
 
 def audioRemoveRows():
     for r in ui.audio_files.selectionModel().selectedRows():
@@ -228,14 +285,21 @@ def setNMR(nmr):
 
 
 def initUi():
-    ui.con_type.currentIndexChanged.connect(lambda index: loadCon(index))
+    ui.con_type.addItems(consoles.keys())
+    ui.con_type.setCurrentIndex(-1)
+    ui.retro_type.addItems(consoles_retro.keys())
+    ui.retro_type.setCurrentIndex(-1)
+    ui.con_type.currentIndexChanged.connect(loadCon)
+    ui.retro_type.currentIndexChanged.connect(loadRetroCon)
     ui.con_console.currentIndexChanged.connect(lambda index: firmV(ui.con_type.currentIndex() == 2 and index in [2, 4]))
     ui.ebook_format.currentIndexChanged.connect(lambda index: ebookdim(index in [1, 2, 3, 4, 5, 9, 12]))
-    ui.app_os.currentIndexChanged.connect(lambda index: setAppGame(index == 4))
+    ui.app_os.currentIndexChanged.connect(lambda index: setAppGame(index))
     ui.app_swCon.setCurrentIndex(0)
 
     audiofnames = []
+    videofnames = []
     ui.audio_files.setColumnHidden(8, True)
+    ui.audio_files.setColumnHidden(9, True)
 
     ui.btnAppli.clicked.connect(lambda: goto(4, "Application"))
     ui.btnAudio.clicked.connect(lambda: goto(0, "Audio"))
@@ -245,6 +309,7 @@ def initUi():
     ui.btnVideo.clicked.connect(lambda: goto(3, "Vidéo"))
     ui.btnGoHome.clicked.connect(lambda: goto(-1))
     ui.audio_addFiles.clicked.connect(lambda: audio_addFiles())
+    ui.film_addFiles.clicked.connect(lambda: video_addFiles())
     ui.jeu_browseFile.clicked.connect(lambda: app_browse())
 
     ui.final_genNFO.clicked.connect(lambda: saveNFO())
@@ -283,45 +348,43 @@ def getCurPage():
     return ui.pages.currentIndex()
 
 
-def loadCon(id):
-    if id == 0:  # Microsoft
-        ui.con_console.clear()
-        ui.con_console.addItems(["Xbox", "Xbox 360", "Xbox One"])
-    elif id == 1:  # Nintendo
-        ui.con_console.clear()
-        ui.con_console.addItems(["3DS", "DS", "GameCube", "Wii", "Wii U"])
-    elif id == 2:  # Sony
-        ui.con_console.clear()
-        ui.con_console.addItems(
-            ["PlayStation", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation Portable",
-             "PlayStation Vita"])
-    ui.con_console.setCurrentIndex(-1)
 
 
-def setAppGame(ok):
+
+def setAppGame(id):
+    ok = id in [4, 5]
     if ok:
-        ui.con_type.setEnabled(True)
-        ui.con_console.setEnabled(True)
-        ui.con_firmw.setEnabled(True)
         ui.app_confMin.setEnabled(False)
         ui.app_install.setEnabled(False)
-        ui.app_swCon.setCurrentIndex(1)
+        if id == 4:
+            ui.con_type.setEnabled(True)
+            ui.con_console.setEnabled(True)
+            ui.con_firmw.setEnabled(True)
+            ui.retro_type.setEnabled(False)
+            ui.retro_console.setEnabled(False)
+            ui.app_swCon.setCurrentIndex(1)
+        else:
+            ui.retro_type.setEnabled(True)
+            ui.retro_console.setEnabled(True)
+            ui.con_type.setEnabled(False)
+            ui.con_console.setEnabled(False)
+            ui.con_firmw.setEnabled(False)
+            ui.app_swCon.setCurrentIndex(2)
     else:
+        ui.app_confMin.setEnabled(True)
+        ui.app_install.setEnabled(True)
+        ui.retro_type.setEnabled(False)
+        ui.retro_console.setEnabled(False)
         ui.con_type.setEnabled(False)
         ui.con_console.setEnabled(False)
         ui.con_firmw.setEnabled(False)
-        ui.app_confMin.setEnabled(True)
-        ui.app_install.setEnabled(True)
         ui.app_swCon.setCurrentIndex(0)
 
 
 def goto(id, name=""):
     if id == -1:
-        msg = QMessageBox()
-        msg.setWindowTitle("t411 NFO Builder")
+        msg = getThemedBox()
         msg.setIcon(QMessageBox.Question)
-        msg.setStyle(DEFAULT_STYLE)
-        msg.setWindowIcon(QIcon(":/image/icon.png"))
         msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
         msg.setDefaultButton(QMessageBox.No)
         msg.setText(
@@ -369,16 +432,50 @@ def audio_addFiles():
                                  "Fichiers audio (*.aac *.ac3 *.aif *.alac *.flac *.ape *.m4a *.mp3 *.mpc *.ogg *.wav *.wv *.wma)")[
         0]
     for file in fn:
+        if checkArch(file):
+            continue
         if file in audiofnames:
-            msg = QMessageBox()
-            msg.setWindowTitle("t411 NFO Builder")
+            msg = getThemedBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setStyle(DEFAULT_STYLE)
-            msg.setWindowIcon(QIcon(":/image/icon.png"))
             msg.setText("Le fichier '" + file + "' a déjà été ajouté.")
             msg.exec_()
         else:
             audiofnames.append(file)
+    audio_updateFiles()
+
+
+def video_addFiles():
+    dialog = QFileDialog()
+    dialog.setFileMode(QFileDialog.ExistingFiles)
+    fn = dialog.getOpenFileNames(None, "Fichiers vidéo", os.path.expanduser("~"),
+                                 "Fichiers vidéo (*.avi *.m2ts *.m4v *.mkv *.mp4 *.mpg *.mpeg *.ogm *.ogv *.wmv)")[
+        0]
+    warnShown1 = False
+    warnShown2 = False
+    for file in fn:
+        if checkArch(file):
+            continue
+        if os.path.splitext(file)[1].lower() == ".m4v" and not warnShown1:
+            msg = getThemedBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText(
+                "<h2>Attention !</h2><p>Les fichiers <b>.m4v</b> ne sont <b><font color=red>acceptés</font></b> que pour les catégories <b>iOS</b> et <b>PSP</b>.")
+            msg.exec_()
+            warnShown1 = True
+        if os.path.splitext(file)[1].lower() == ".wmv" and not warnShown2:
+            msg = getThemedBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText(
+                "<h2>Attention !</h2><p>Les fichiers <b>.wmv</b> ne sont <b><font color=red>acceptés</font></b> que pour le <b>porno</b>.")
+            msg.exec_()
+            warnShown2 = True
+        if file in videofnames:
+            msg = getThemedBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Le fichier '" + file + "' a déjà été ajouté.")
+            msg.exec_()
+        else:
+            videofnames.append(file)
     audio_updateFiles()
 
 
@@ -412,6 +509,7 @@ def audio_updateFiles():
     enc = []
     genres = []
     freqs = []
+    exts = []
     year = -1
     while ui.audio_files.rowCount() > 0:
         ui.audio_files.removeRow(0)  # Vider le tableau
@@ -438,6 +536,7 @@ def audio_updateFiles():
             track = mediaInfo.tracks[0]
             audioTrack = mediaInfo.tracks[1]
             freqs.append(audioTrack.sampling_rate)
+            exts.append(os.path.splitext(file)[1])
             chan = audioTrack.channel_s
             codecs.append(audioTrack.other_codec[0])
             lib = track.writing_library
@@ -468,22 +567,40 @@ def audio_updateFiles():
                 dSum += duree
                 ui.audio_files.setItem(rowPos, 6, ROTableItem(durationToText(int(duree))))  # Durée
             brate = track.overall_bit_rate
-            if brate is not None:
-                brates.append(brate)
-                ui.audio_files.setItem(rowPos, 7, ROTableItem(sizeof_fmt(brate, 'bps', 1000)))  # Bitrate
+            brates.append(brate)
+            ui.audio_files.setItem(rowPos, 9, ROTableItem(str(brate)))
+            ui.audio_files.setItem(rowPos, 7, ROTableItem(sizeof_fmt(brate, 'bps', 1000)))  # Bitrate
 
-    albums = set(
-        [orValue(lambda: ui.audio_files.item(r, 4).text(), "[Inconnu]") for r in range(0, ui.audio_files.rowCount())])
+    albums = set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())])
     if len(albums) == 2 and "[Inconnu]" in albums:
         other = [a for a in albums if a != "[Inconnu]"][0]
         for r in range(0, ui.audio_files.rowCount()):
             ui.audio_files.setItem(r, 4, QTableWidgetItem(other))
-    performers = set(
-        [orValue(lambda: ui.audio_files.item(r, 3).text(), "[Inconnu]") for r in range(0, ui.audio_files.rowCount())])
+    performers = set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())])
     if len(albums) == 2 and "[Inconnu]" in albums:
         other = [a for a in performers if a != "[Inconnu]"][0]
         for r in range(0, ui.audio_files.rowCount()):
             ui.audio_files.setItem(r, 3, QTableWidgetItem(other))
+
+    # Vérifier multi-bitrate
+    for al in albums:
+        abrates = [ui.audio_files.item(r, 7).text() for r in range(0, ui.audio_files.rowCount()) if
+                   ui.audio_files.item(r, 4).text() == al]
+        if len([b for b in abrates if b != abrates[0]]) > 0:
+            msg = getThemedBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText(
+                "<h2>Attention !</h2><p>Le <b>multi-bitrate</b> est <b><font color='red'>interdit</font></b> pour un même album (" + al + ").<br/>Exemple : mélange de 128 Kbps et de 256 Kbps</p>")
+            msg.exec_()
+
+    # Vérifier multi-format
+    if len([ext for ext in exts if ext != exts[0]]) > 0:
+        msg = getThemedBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText(
+            "<h2>Attention !</h2><p>Le <b>multi-format</b> est <b><font color='red'>interdit</font></b>.<br/>Exemple : mélange de MP3 et de Flac dans un <b>même torrent</b></p>")
+        msg.exec_()
+
     ui.audio_files.sortByColumn(0, 0)
     ui.audio_totalTime.setText(durationToText(int(dSum)))
     ui.txt_totalSize.setText(sizeof_fmt(sSum))
@@ -527,7 +644,7 @@ def getHeader(str, sym="-", add=0):
     return sym * (82 + add) + "\n" + centerStr(str, 82 + add) + "\n" + sym * (82 + add) + "\n\n"
 
 
-def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True):
+def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True, noNewLine=False):
     maxl = 21 + pad
     ret = ""
     for f, v in fields.items():
@@ -549,8 +666,8 @@ def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True):
                 ret += c
             i += 1
         ret += "\n"
-
-    return ret + "\n"
+    if not noNewLine: ret += "\n"
+    return ret
 
 
 def fisEmpty(field):
@@ -587,7 +704,6 @@ def validate():
         required[ui.ebooks_format] = "Format"
     elif cur == 3:  # Vidéo
         required[ui.film_files] = "Fichiers vidéo"
-        required[ui.film_format] = "Format"
     elif cur == 4:  # Appli / Jeu
         required[ui.app_nom] = "Nom"
         required[ui.app_langue] = "Langue"
@@ -605,11 +721,8 @@ def validate():
     req = [("<li>&nbsp;&nbsp;" + v + "</li>") for (k, v) in required.items() if
            (fisEmpty(k) and k.isVisible() and k.isEnabled())]
     if len(req) > 0:
-        msg = QMessageBox()
-        msg.setWindowTitle("Erreur")
+        msg = getThemedBox()
         msg.setIcon(QMessageBox.Critical)
-        msg.setStyle(DEFAULT_STYLE)
-        msg.setWindowIcon(QIcon(":/image/icon.png"))
         msg.setText("Les champs suivants sont requis :<b><ul>" + ''.join(req) + "</ul></b>")
         msg.exec_()
         return False
@@ -634,8 +747,8 @@ def genNFO():
         nfo += getHeader("Infos audio")
         nfo += getFields(OrderedDict([
             ("Interprète(s)",
-             ", ".join(set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())]))),
-            ("Album(s)", "Discographie" if ui.audio_discographie.isChecked() else ", ".join(
+             " ; ".join(set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())]))),
+            ("Album(s)", "Discographie" if ui.audio_discographie.isChecked() else " ; ".join(
                 set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())]))),
             ("Codec", ui.audio_codec.text()),
             ("Fréquence", ui.audio_freq.text()),
@@ -660,7 +773,9 @@ def genNFO():
                    al in albums]
 
         for album in grouped:
-            nfo += album[0] + "\n\n"
+            nfo += textwrap.fill(
+                album[0] + " [" + sizeof_fmt(average([float(ui.audio_files.item(r, 9).text()) for r in album[1]]),
+                                             "bps", 1000) + "]", width=82, replace_whitespace=False) + "\n\n"
             lastNum = 0
             for rowID in album[1]:
                 tmp = ui.audio_files.item(rowID, 0).text()
@@ -722,7 +837,7 @@ def genNFO():
                 "Nom": ui.app_nom.text(),
                 "Langue": ui.app_langue.currentText()
             }
-        )
+        , noNewLine=False)
         if ui.app_swCon.currentIndex() == 0:
             nfo += getFields(
                 {
@@ -731,12 +846,17 @@ def genNFO():
                     "Étapes d'installation": ui.app_install.toPlainText()
                 }
             )
-        else:
+        elif ui.app_swCon.currentIndex() == 1:
             nfo += getFields(
                 {
-                    "Constructeur": ui.con_type.text(),
-                    "Console": ui.con_console.text(),
+                    "Console": ui.con_type.currentText() + " " + ui.con_console.currentText(),
                     "Firmware": ui.con_firmw.text()
+                }
+            )
+        elif ui.app_swCon.currentIndex() == 2:
+            nfo += getFields(
+                {
+                    "Console": ui.retro_type.currentText() + " " + ui.retro_console.currentText()
                 }
             )
 
