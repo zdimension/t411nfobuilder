@@ -63,7 +63,7 @@
     <Folder Include="dist\main\lib2to3\tests\" />
     <Folder Include="dist\main\lib2to3\tests\data" />
     <Folder Include="dist\main\pymediainfo-2.1.3-py3.4.egg-info" />
-    <Folder Include="image" />
+    <Folder Include="image\" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.4" />
