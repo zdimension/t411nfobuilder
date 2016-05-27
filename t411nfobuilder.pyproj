@@ -27,6 +27,8 @@
     <Compile Include="tnb_gui.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BUILD-GUI.bat" />
+    <Content Include="BUILD.bat" />
     <Content Include="build\main\warnmain.txt" />
     <Content Include="dist\main\lib2to3\Grammar.txt" />
     <Content Include="dist\main\lib2to3\PatternGrammar.txt" />
@@ -36,6 +38,7 @@
     <Content Include="dist\main\pymediainfo-2.1.3-py3.4.egg-info\namespace_packages.txt" />
     <Content Include="dist\main\pymediainfo-2.1.3-py3.4.egg-info\SOURCES.txt" />
     <Content Include="dist\main\pymediainfo-2.1.3-py3.4.egg-info\top_level.txt" />
+    <Content Include="icon.ico" />
     <Content Include="images.qrc" />
     <Content Include="image\add.png" />
     <Content Include="image\app.png" />
@@ -51,7 +54,11 @@
     <Content Include="image\remove-disabled.png" />
     <Content Include="image\remove.png" />
     <Content Include="image\video.png" />
+    <Content Include="LICENSE" />
     <Content Include="main.spec" />
+    <Content Include="MediaInfo.dll" />
+    <Content Include="README.md" />
+    <Content Include="tnb_gui.ui" />
     <Content Include="y.spec" />
   </ItemGroup>
   <ItemGroup>

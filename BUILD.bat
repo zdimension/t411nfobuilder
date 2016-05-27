@@ -1,2 +1,2 @@
-pyinstaller --additional-hooks-dir=. -w -y main.pyw
+pyinstaller --onefile --additional-hooks-dir=. --icon=icon.ico --windowed -y main.pyw
 pause

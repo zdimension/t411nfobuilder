@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>760</width>
-    <height>650</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -449,7 +449,7 @@ QPushButton:pressed {
                  <enum>Qt::SolidLine</enum>
                 </property>
                 <property name="columnCount">
-                 <number>10</number>
+                 <number>8</number>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -498,16 +498,6 @@ QPushButton:pressed {
                 <column>
                  <property name="text">
                   <string>Bitrate</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>filename</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>brate</string>
                  </property>
                 </column>
                </widget>
@@ -636,6 +626,12 @@ QPushButton:pressed {
             </item>
             <item>
              <widget class="QGroupBox" name="horizontalGroupBox_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="title">
                <string>Infos</string>
               </property>
@@ -3970,69 +3966,54 @@ QPushButton:pressed {
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <spacer name="verticalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_13" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="3" column="1">
-                    <spacer name="verticalSpacer_2">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_14" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="5" column="1">
-                    <spacer name="verticalSpacer_3">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_15" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="7" column="1">
-                    <spacer name="verticalSpacer_4">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_16" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="9" column="1">
-                    <spacer name="verticalSpacer_5">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_17" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -4161,69 +4142,54 @@ QPushButton:pressed {
                     <widget class="QLineEdit" name="audio_vorbisTag"/>
                    </item>
                    <item row="1" column="1">
-                    <spacer name="verticalSpacer_6">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_18" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="3" column="1">
-                    <spacer name="verticalSpacer_7">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_19" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="5" column="1">
-                    <spacer name="verticalSpacer_8">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_20" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="7" column="1">
-                    <spacer name="verticalSpacer_9">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_21" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                    <item row="9" column="1">
-                    <spacer name="verticalSpacer_10">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
+                    <widget class="QWidget" name="widget_22" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                    </spacer>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -4245,25 +4211,25 @@ QPushButton:pressed {
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="1">
-                    <spacer name="verticalSpacer_25">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>15</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
                    <item row="2" column="1">
                     <widget class="QCheckBox" name="audio_notMyRip">
                      <property name="text">
                       <string>NMR (Pas Mon Rip)</string>
                      </property>
                     </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <spacer name="verticalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                    <item row="4" column="0">
                     <widget class="QLabel" name="label_4">
@@ -4279,14 +4245,14 @@ QPushButton:pressed {
                     <widget class="QLineEdit" name="audio_ripper"/>
                    </item>
                    <item row="5" column="1">
-                    <spacer name="verticalSpacer_13">
+                    <spacer name="verticalSpacer_3">
                      <property name="orientation">
                       <enum>Qt::Vertical</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>15</height>
+                       <height>20</height>
                       </size>
                      </property>
                     </spacer>
@@ -4305,14 +4271,14 @@ QPushButton:pressed {
                     <widget class="QLineEdit" name="audio_cdmodel"/>
                    </item>
                    <item row="7" column="1">
-                    <spacer name="verticalSpacer_14">
+                    <spacer name="verticalSpacer_4">
                      <property name="orientation">
                       <enum>Qt::Vertical</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>15</height>
+                       <height>20</height>
                       </size>
                      </property>
                     </spacer>
@@ -4388,15 +4354,15 @@ QPushButton:pressed {
                      </item>
                     </widget>
                    </item>
-                   <item row="3" column="1">
-                    <spacer name="verticalSpacer_11">
+                   <item row="1" column="1">
+                    <spacer name="verticalSpacer">
                      <property name="orientation">
                       <enum>Qt::Vertical</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>15</height>
+                       <height>20</height>
                       </size>
                      </property>
                     </spacer>
@@ -4474,6 +4440,9 @@ QPushButton:pressed {
               <layout class="QHBoxLayout" name="horizontalLayout_9">
                <item>
                 <layout class="QFormLayout" name="formLayout_5">
+                 <property name="fieldGrowthPolicy">
+                  <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                 </property>
                  <property name="labelAlignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -4751,134 +4720,110 @@ QPushButton:pressed {
                   <widget class="QLineEdit" name="ebook_dimensions"/>
                  </item>
                  <item row="1" column="1">
-                  <spacer name="verticalSpacer_15">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
+                   <property name="minimumSize">
                     <size>
-                     <width>20</width>
-                     <height>40</height>
+                     <width>0</width>
+                     <height>0</height>
                     </size>
                    </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="3" column="1">
-                  <spacer name="verticalSpacer_16">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_2" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="5" column="1">
-                  <spacer name="verticalSpacer_17">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_3" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="7" column="1">
-                  <spacer name="verticalSpacer_18">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_4" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="9" column="1">
-                  <spacer name="verticalSpacer_19">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_5" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="11" column="1">
-                  <spacer name="verticalSpacer_20">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_6" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="13" column="1">
-                  <spacer name="verticalSpacer_21">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_7" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="15" column="1">
-                  <spacer name="verticalSpacer_22">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_8" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="17" column="1">
-                  <spacer name="verticalSpacer_23">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_9" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="19" column="1">
-                  <spacer name="verticalSpacer_24">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_10" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>1</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -5098,7 +5043,7 @@ QPushButton:pressed {
             <item>
              <widget class="QGroupBox" name="groupBox_3">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -5436,7 +5381,7 @@ QPushButton:pressed {
                 <item>
                  <widget class="QPushButton" name="film_removeRows">
                   <property name="enabled">
-                   <bool>true</bool>
+                   <bool>false</bool>
                   </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -5872,6 +5817,9 @@ smartphone)</string>
                      <property name="labelAlignment">
                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                      </property>
+                     <property name="verticalSpacing">
+                      <number>0</number>
+                     </property>
                      <item row="0" column="1">
                       <widget class="QComboBox" name="con_type">
                        <property name="currentIndex">
@@ -5892,7 +5840,7 @@ smartphone)</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="0">
+                     <item row="2" column="0">
                       <widget class="QLabel" name="label_48">
                        <property name="font">
                         <font>
@@ -5905,13 +5853,13 @@ smartphone)</string>
                        </property>
                       </widget>
                      </item>
-                     <item row="1" column="1">
+                     <item row="2" column="1">
                       <widget class="QComboBox" name="con_console"/>
                      </item>
-                     <item row="2" column="1">
+                     <item row="4" column="1">
                       <widget class="QLineEdit" name="con_firmw"/>
                      </item>
-                     <item row="2" column="0">
+                     <item row="4" column="0">
                       <widget class="QLabel" name="con_lblFirmw">
                        <property name="font">
                         <font>
@@ -5921,6 +5869,26 @@ smartphone)</string>
                        </property>
                        <property name="text">
                         <string>Firmware :</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QWidget" name="widget_11" native="true">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>1</verstretch>
+                        </sizepolicy>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1">
+                      <widget class="QWidget" name="widget_12" native="true">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>1</verstretch>
+                        </sizepolicy>
                        </property>
                       </widget>
                      </item>

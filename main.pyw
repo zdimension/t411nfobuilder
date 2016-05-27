@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from tnb_gui import Ui_MainWindow
 import os
@@ -18,7 +19,10 @@ def most_common(L):
     return counts.most_common(1)[0][0]
 
 
-__version__ = "0.3"
+__version__ = "0.5"
+uiInitialized = False
+
+ws_save = {}
 
 
 def getThemedBox():
@@ -136,10 +140,12 @@ def firmV(v):
         ui.formLayout_10.insertRow(3, ui.con_lblFirmw, ui.con_firmw)
         ui.con_lblFirmw.show()
         ui.con_firmw.show()
+        ui.widget_12.show()
     else:
         ui.con_firmw.hide()
         ui.con_firmw.setText("")
         ui.con_lblFirmw.hide()
+        ui.widget_12.hide()
         ui.formLayout_10.removeWidget(ui.con_firmw)
         ui.formLayout_10.removeWidget(ui.con_lblFirmw)
 
@@ -266,12 +272,20 @@ def loadGenres():
 
 
 audiofnames = []
+audiofdata = {}
 videofnames = []
+videofdata = {}
 
 def audioRemoveRows():
     for r in ui.audio_files.selectionModel().selectedRows():
-        audiofnames.remove(ui.audio_files.item(r.row(), 8).text())
+        audiofnames.remove(audiofdata[r.row()]['file'])
     audio_updateFiles()
+
+
+def videoRemoveRows():
+    for r in ui.film_files.selectionModel().selectedRows():
+        videofnames.remove(videofdata[r.row()]['file'])
+    video_updateFiles()
 
 
 def setNMR(nmr):
@@ -284,71 +298,8 @@ def setNMR(nmr):
         ui.audio_source.setCurrentIndex(-1)
 
 
-def initUi():
-    ui.con_type.addItems(consoles.keys())
-    ui.con_type.setCurrentIndex(-1)
-    ui.retro_type.addItems(consoles_retro.keys())
-    ui.retro_type.setCurrentIndex(-1)
-    ui.con_type.currentIndexChanged.connect(loadCon)
-    ui.retro_type.currentIndexChanged.connect(loadRetroCon)
-    ui.con_console.currentIndexChanged.connect(lambda index: firmV(ui.con_type.currentIndex() == 2 and index in [2, 4]))
-    ui.ebook_format.currentIndexChanged.connect(lambda index: ebookdim(index in [1, 2, 3, 4, 5, 9, 12]))
-    ui.app_os.currentIndexChanged.connect(lambda index: setAppGame(index))
-    ui.app_swCon.setCurrentIndex(0)
-
-    audiofnames = []
-    videofnames = []
-    ui.audio_files.setColumnHidden(8, True)
-    ui.audio_files.setColumnHidden(9, True)
-
-    ui.btnAppli.clicked.connect(lambda: goto(4, "Application"))
-    ui.btnAudio.clicked.connect(lambda: goto(0, "Audio"))
-    ui.btnEBook.clicked.connect(lambda: goto(1, "eBook"))
-    ui.btnEBooks.clicked.connect(lambda: goto(2, "eBooks"))
-    ui.btnJeu.clicked.connect(lambda: goto(4, "Jeu"))
-    ui.btnVideo.clicked.connect(lambda: goto(3, "Vidéo"))
-    ui.btnGoHome.clicked.connect(lambda: goto(-1))
-    ui.audio_addFiles.clicked.connect(lambda: audio_addFiles())
-    ui.film_addFiles.clicked.connect(lambda: video_addFiles())
-    ui.jeu_browseFile.clicked.connect(lambda: app_browse())
-
-    ui.final_genNFO.clicked.connect(lambda: saveNFO())
-
-    ui.btnGenNfo.clicked.connect(lambda: genNFO())
-
-    ui.final_goBack.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(1))
-
-    ui.audio_files.itemSelectionChanged.connect(
-        lambda: ui.audio_removeRows.setEnabled(len(ui.audio_files.selectedItems()) > 0))
-
-    ui.audio_removeRows.clicked.connect(audioRemoveRows)
-
-    ui.audio_notMyRip.stateChanged.connect(lambda: setNMR(ui.audio_notMyRip.isChecked()))
-
-    loadGenres()
-
-    ebookdim(False)
-
-    firmV(False)
-    ui.stackedWidget.setCurrentIndex(0)
-    window.setWindowTitle("t411 NFO Builder " + __version__)
-    ui.label.setText("t411 NFO Builder " + __version__)
-
-
-app = QApplication(sys.argv)
-DEFAULT_STYLE = QStyleFactory.create(app.style().objectName())
-app.setStyle(QStyleFactory.create("Fusion"))
-window = myMainWindow()
-ui = Ui_MainWindow()
-ui.setupUi(window)
-initUi()
-
-
 def getCurPage():
     return ui.pages.currentIndex()
-
-
-
 
 
 def setAppGame(id):
@@ -381,6 +332,101 @@ def setAppGame(id):
         ui.app_swCon.setCurrentIndex(0)
 
 
+def saveWindowState():
+    global ws_save
+    ws_save = {}
+    ws_save['geom'] = window.saveGeometry()
+    ws_save['state'] = window.saveState()
+    ws_save['max'] = window.isMaximized()
+    if not ws_save['max']:
+        ws_save['pos'] = window.pos()
+        ws_save['size'] = window.size()
+
+def restoreWindowState():
+    global ws_save
+    window.restoreState(ws_save['state'])
+    if ws_save['max']:
+        window.setWindowState(Qt.WindowNoState)
+        window.show()
+        window.setWindowState(Qt.WindowMaximized)
+    else:
+        window.restoreGeometry(ws_save['geom'])
+        window.move(ws_save['pos'])
+        window.resize(ws_save['size'])
+    ws_save = {}
+    
+
+
+def initUi():
+    window.hide()
+    geom = None
+    isFullScreen = False
+    if uiInitialized:
+        geom = window.saveGeometry()
+        isFullScreen = window.isMaximized()
+    ui.setupUi(window)
+    if geom is not None and not window.isMaximized():
+        window.restoreGeometry(geom)
+    window.show()
+    if isFullScreen: window.setWindowState(Qt.WindowMaximized)
+    #window.move(QApplication.desktop().screen().rect().center() - window.rect().center())
+    #window.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, window.size(), QApplication.desktop().availableGeometry()))
+    ui.con_type.addItems(consoles.keys())
+    ui.con_type.setCurrentIndex(-1)
+    ui.retro_type.addItems(consoles_retro.keys())
+    ui.retro_type.setCurrentIndex(-1)
+    ui.con_type.currentIndexChanged.connect(loadCon)
+    ui.retro_type.currentIndexChanged.connect(loadRetroCon)
+    ui.con_console.currentIndexChanged.connect(lambda index: firmV(ui.con_type.currentIndex() == 2 and index in [2, 4]))
+    ui.ebook_format.currentIndexChanged.connect(lambda index: ebookdim(index in [1, 2, 3, 4, 5, 9, 12]))
+    ui.app_os.currentIndexChanged.connect(lambda index: setAppGame(index))
+    ui.app_swCon.setCurrentIndex(0)
+
+    audiofnames = []
+    audiofdata = {}
+    videofnames = []
+    videofdata = {}
+
+    ui.btnAppli.clicked.connect(lambda: goto(4, "Application"))
+    ui.btnAudio.clicked.connect(lambda: goto(0, "Audio"))
+    ui.btnEBook.clicked.connect(lambda: goto(1, "eBook"))
+    ui.btnEBooks.clicked.connect(lambda: goto(2, "eBooks"))
+    ui.btnJeu.clicked.connect(lambda: goto(4, "Jeu"))
+    ui.btnVideo.clicked.connect(lambda: goto(3, "Vidéo"))
+    ui.btnGoHome.clicked.connect(lambda: goto(-1))
+    ui.audio_addFiles.clicked.connect(lambda: audio_addFiles())
+    ui.film_addFiles.clicked.connect(lambda: video_addFiles())
+    ui.jeu_browseFile.clicked.connect(lambda: app_browse())
+
+    ui.final_genNFO.clicked.connect(lambda: saveNFO())
+
+    ui.btnGenNfo.clicked.connect(lambda: genNFO())
+
+    ui.final_goBack.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(1))
+
+    ui.audio_files.itemSelectionChanged.connect(
+        lambda: ui.audio_removeRows.setEnabled(len(ui.audio_files.selectedItems()) > 0))
+    ui.film_files.itemSelectionChanged.connect(
+        lambda: ui.film_removeRows.setEnabled(len(ui.film_files.selectedItems()) > 0))
+
+    ui.audio_removeRows.clicked.connect(audioRemoveRows)
+    ui.film_removeRows.clicked.connect(videoRemoveRows)
+
+    ui.audio_notMyRip.stateChanged.connect(lambda: setNMR(ui.audio_notMyRip.isChecked()))
+
+    loadGenres()
+
+    ebookdim(False)
+
+    firmV(False)
+    ui.stackedWidget.setCurrentIndex(0)
+    window.setWindowTitle("t411 NFO Builder " + __version__)
+    ui.label.setText("t411 NFO Builder " + __version__)
+
+
+
+
+
 def goto(id, name=""):
     if id == -1:
         msg = getThemedBox()
@@ -390,8 +436,9 @@ def goto(id, name=""):
         msg.setText(
             "Voulez-vous vraiment retourner à l'accueil ?\nToutes les modifications non sauvegardées seront perdues.")
         if msg.exec_() == QMessageBox.Yes:
-            ui.setupUi(window)
+            saveWindowState()
             initUi()
+            restoreWindowState()
     else:
         ui.pages.setCurrentIndex(id)
         ui.stackedWidget.setCurrentIndex(1)
@@ -429,8 +476,12 @@ def audio_addFiles():
     dialog = QFileDialog()
     dialog.setFileMode(QFileDialog.ExistingFiles)
     fn = dialog.getOpenFileNames(None, "Fichiers audio", os.path.expanduser("~"),
-                                 "Fichiers audio (*.aac *.ac3 *.aif *.alac *.flac *.ape *.m4a *.mp3 *.mpc *.ogg *.wav *.wv *.wma)")[
+                                 "Fichiers audio (*.ac3 *.aif *.aiff *.alac *.ape *.flac *.m4a *.mp3 *.mpc *.oga *.ogg *.wav *.wma *.wv);;" +
+                                 "Fichiers audio compressés (*.ac3 *.m4a *.mp3 *.mpc *.ogg *.oga *.wma *.wv);;" +
+                                 "Fichiers audio compressés sans perte (*.alac *.ape *.flac *.wma *.wv);;" +
+                                 "Fichiers audio non compressés (*.aif *.aiff *.wav)")[
         0]
+    if len(fn) == 0: return
     for file in fn:
         if checkArch(file):
             continue
@@ -450,6 +501,7 @@ def video_addFiles():
     fn = dialog.getOpenFileNames(None, "Fichiers vidéo", os.path.expanduser("~"),
                                  "Fichiers vidéo (*.avi *.m2ts *.m4v *.mkv *.mp4 *.mpg *.mpeg *.ogm *.ogv *.wmv)")[
         0]
+    if len(fn) == 0: return
     warnShown1 = False
     warnShown2 = False
     for file in fn:
@@ -476,7 +528,7 @@ def video_addFiles():
             msg.exec_()
         else:
             videofnames.append(file)
-    audio_updateFiles()
+    video_updateFiles()
 
 
 class ROTableItem(QTableWidgetItem):
@@ -513,6 +565,7 @@ def audio_updateFiles():
     year = -1
     while ui.audio_files.rowCount() > 0:
         ui.audio_files.removeRow(0)  # Vider le tableau
+    audiofdata.clear()
     if len(audiofnames) == 0:
         # Tout vider
         ui.audio_totalTime.setText("")
@@ -530,8 +583,9 @@ def audio_updateFiles():
         if (os.path.isfile(file)):
             rowPos = ui.audio_files.rowCount()
             ui.audio_files.insertRow(rowPos)
-            ui.audio_files.setItem(rowPos, 8, QTableWidgetItem(file))
-            ui.audio_files.setItem(rowPos, 1, QTableWidgetItem(os.path.basename(file)))  # Nom du fichier
+            audiofdata[rowPos] = {}
+            audiofdata[rowPos]['file'] = file
+            ui.audio_files.setItem(rowPos, 1, ROTableItem(os.path.basename(file)))  # Nom du fichier
             mediaInfo = MediaInfo.parse(file)
             track = mediaInfo.tracks[0]
             audioTrack = mediaInfo.tracks[1]
@@ -568,8 +622,77 @@ def audio_updateFiles():
                 ui.audio_files.setItem(rowPos, 6, ROTableItem(durationToText(int(duree))))  # Durée
             brate = track.overall_bit_rate
             brates.append(brate)
-            ui.audio_files.setItem(rowPos, 9, ROTableItem(str(brate)))
+            audiofdata[rowPos]['bitrate'] = brate
             ui.audio_files.setItem(rowPos, 7, ROTableItem(sizeof_fmt(brate, 'bps', 1000)))  # Bitrate
+
+    albums = set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())])
+    if len(albums) == 2 and "[Inconnu]" in albums:
+        other = [a for a in albums if a != "[Inconnu]"][0]
+        for r in range(0, ui.audio_files.rowCount()):
+            ui.audio_files.setItem(r, 4, QTableWidgetItem(other))
+    performers = set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())])
+    if len(albums) == 2 and "[Inconnu]" in albums:
+        other = [a for a in performers if a != "[Inconnu]"][0]
+        for r in range(0, ui.audio_files.rowCount()):
+            ui.audio_files.setItem(r, 3, QTableWidgetItem(other))
+
+    # Vérifier multi-bitrate
+    for al in albums:
+        abrates = [ui.audio_files.item(r, 7).text() for r in range(0, ui.audio_files.rowCount()) if
+                   ui.audio_files.item(r, 4).text() == al]
+        if len([b for b in abrates if b != abrates[0]]) > 0:
+            msg = getThemedBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText(
+                "<h2>Attention !</h2><p>Le <b>multi-bitrate</b> est <b><font color='red'>interdit</font></b> pour un même album (" + al + ").<br/>Exemple : mélange de 128 Kbps et de 256 Kbps</p>")
+            msg.exec_()
+
+    # Vérifier multi-format
+    if len([ext for ext in exts if ext != exts[0]]) > 0:
+        msg = getThemedBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText(
+            "<h2>Attention !</h2><p>Le <b>multi-format</b> est <b><font color='red'>interdit</font></b>.<br/>Exemple : mélange de MP3 et de Flac dans un <b>même torrent</b></p>")
+        msg.exec_()
+
+    ui.audio_files.sortByColumn(0, 0)
+    ui.audio_totalTime.setText(durationToText(int(dSum)))
+    ui.txt_totalSize.setText(sizeof_fmt(sSum))
+    if year is not None: ui.audio_year.setValue(int(year))
+    ui.audio_codec.setText(", ".join(set(codecs)))
+    ui.audio_channel.setText(chanTxt(chan))
+    ui.audio_encoder.setText(most_common(enc))
+    ui.audio_genre.setCurrentText(", ".join(set(genres)))
+    ui.audio_avrBitrate.setText(sizeof_fmt(average(brates), 'bps', 1000))
+    ui.audio_freq.setText(sizeof_fmt(most_common(freqs), 'Hz', 1000))
+
+
+def video_updateFiles():
+    dSum = 0
+    sSum = 0
+
+    while ui.film_files.rowCount() > 0:
+        ui.film_files.removeRow(0)  # Vider le tableau
+    if len(videofnames) == 0:
+        # Tout vider
+        ui.txt_totalSize.setText("")
+        ui.film_format.setCurrentIndex(-1)
+        ui.film_totalTime.setText("")
+        return
+    videofdata.clear()
+    for file in videofnames:
+        if (os.path.isfile(file)):
+            rowPos = ui.film_files.rowCount()
+            ui.film_files.insertRow(rowPos)
+            videofdata[rowPos] = {}
+            videofdata[rowPos]['file'] = file
+            ui.film_files.setItem(rowPos, 0, QTableWidgetItem(os.path.basename(file)))  # Nom du fichier
+            mediaInfo = MediaInfo.parse(file)
+            trackGeneral = mediaInfo.tracks[0]
+
+            duree = trackGeneral.duration / 1000
+            dSum += duree
+            ui.audio_files.setItem(rowPos, 6, ROTableItem(durationToText(int(duree))))  # Durée
 
     albums = set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())])
     if len(albums) == 2 and "[Inconnu]" in albums:
@@ -629,9 +752,10 @@ def isEmpty(str):
 def saveNFO():
     dlg = QFileDialog()
     fn = dlg.getSaveFileName(None, "Enregistrer le NFO", "", "Fichiers NFO (*.nfo)")[0]
-    f = open(fn, "w")
-    f.write(ui.plainTextEdit.toPlainText())
-    f.close()
+    if fn != '':
+        f = open(fn, "w")
+        f.write(ui.plainTextEdit.toPlainText())
+        f.close()
 
 
 def centerStr(str, length):
@@ -641,7 +765,7 @@ def centerStr(str, length):
 
 
 def getHeader(str, sym="-", add=0):
-    return sym * (82 + add) + "\n" + centerStr(str, 82 + add) + "\n" + sym * (82 + add) + "\n\n"
+    return sym * (92 + add) + "\n" + centerStr(str, 92 + add) + "\n" + sym * (92 + add) + "\n\n"
 
 
 def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True, noNewLine=False):
@@ -651,7 +775,7 @@ def getFields(fields, pad=3, sym=".", fix=-1, removeEmpty=True, noNewLine=False)
         if removeEmpty and isEmpty(v): continue
         cur = f + sym * (maxl - len(f)) + ": "
         curl = len(cur)
-        rem = 82 - curl
+        rem = 92 - curl
 
         spc = " " * curl
         ret += cur
@@ -734,9 +858,9 @@ def genNFO():
     if not validate(): return
 
     nfoTop = ""
-    nfoTop += "+----------------------------------------------------------------------------------------+\n"
-    nfoTop += "|*+------------------------------------------------------------------------------------+*|\n"
-    nfoTop += "|*|                                                                                    |*|\n"
+    nfoTop += "+--------------------------------------------------------------------------------------------------+\n"
+    nfoTop += "|*+----------------------------------------------------------------------------------------------+*|\n"
+    nfoTop += "|*|                                                                                              |*|\n"
 
     nfo = ""
     nfo += getHeader(ui.txt_relName.text(), "*", 2)
@@ -774,7 +898,7 @@ def genNFO():
 
         for album in grouped:
             nfo += textwrap.fill(
-                album[0] + " [" + sizeof_fmt(average([float(ui.audio_files.item(r, 9).text()) for r in album[1]]),
+                album[0] + " [" + sizeof_fmt(average([float(audiofdata[r]['bitrate']) for r in album[1]]),
                                              "bps", 1000) + "]", width=82, replace_whitespace=False) + "\n\n"
             lastNum = 0
             for rowID in album[1]:
@@ -783,7 +907,7 @@ def genNFO():
                 h = (str(lastNum) + ". ").rjust(6)
                 v = ui.audio_files.item(rowID, 2).text()
                 curl = len(h)
-                rem = 82 - curl - 11
+                rem = 92 - curl - 11
 
                 spc = " " * curl
                 nfo += h
@@ -874,18 +998,25 @@ def genNFO():
         nfo += textwrap.fill(ui.txt_relNotes.toPlainText(), width=82, replace_whitespace=False) + "\n"
 
     nfoBottom = "\n"
-    nfoBottom += "|*|                                                                                    |*|\n"
-    nfoBottom += "|*|                                                                                    |*|\n"
-    nfoBottom += "|*| |--------------------------------------------------------------------------------| |*|\n"
-    nfoBottom += "|*+-|                        NFO créé avec t411nfobuilder X.X                        |-+*|\n".replace(
+    nfoBottom += "|*|                                                                                              |*|\n"
+    nfoBottom += "|*|                                                                                              |*|\n"
+    nfoBottom += "|*|      |--------------------------------------------------------------------------------|      |*|\n"
+    nfoBottom += "|*+------|                        NFO créé avec t411nfobuilder X.X                        |------+*|\n".replace(
         "X.X", __version__)
-    nfoBottom += "+---|                  https://github.com/zdimension/t411nfobuilder                  |---+\n"
-    nfoBottom += "    |--------------------------------------------------------------------------------|    \n"
-    nfo = nfoTop + "\n".join(["|*|" + x.ljust(83).rjust(84) + "|*|" for x in nfo.split("\n")]) + nfoBottom
+    nfoBottom += "+--------|                  https://github.com/zdimension/t411nfobuilder                  |--------+\n"
+    nfoBottom += "         |--------------------------------------------------------------------------------|         \n"
+    nfo = nfoTop + "\n".join(["|*|" + x.ljust(93).rjust(94) + "|*|" for x in nfo.split("\n")]) + nfoBottom
 
     ui.plainTextEdit.setPlainText(nfo)
     ui.stackedWidget.setCurrentIndex(2)
 
 
-window.show()
+app = QApplication(sys.argv)
+DEFAULT_STYLE = QStyleFactory.create(app.style().objectName())
+app.setStyle(QStyleFactory.create("Fusion"))
+window = myMainWindow()
+ui = Ui_MainWindow()
+initUi()
+uiInitialized = True
+#window.show()
 sys.exit(app.exec_())
