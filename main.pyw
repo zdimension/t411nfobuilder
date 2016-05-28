@@ -19,10 +19,203 @@ def most_common(L):
     return counts.most_common(1)[0][0]
 
 
-__version__ = "0.5"
+__version__ = "0.6"
 uiInitialized = False
 
 ws_save = {}
+
+languages = {"aa": "Afar",
+             "ab": "Abkhaze",
+             "af": "Afrikaans",
+             "ak": "Akan",
+             "sq": "Albanais",
+             "am": "Amharique",
+             "ar": "Arabe",
+             "an": "Aragonais",
+             "hy": "Arménien",
+             "as": "Assamais",
+             "av": "Avar",
+             "ae": "Avestique",
+             "ay": "Aymara",
+             "az": "Azéri",
+             "ba": "Bachkir",
+             "bm": "Bambara",
+             "eu": "Basque",
+             "be": "Biélorusse",
+             "bn": "Bengali",
+             "bh": "Langues Biharis",
+             "bi": "Bichlamar",
+             "bs": "Bosniaque",
+             "br": "Breton",
+             "bg": "Bulgare",
+             "my": "Birman",
+             "ca": "Catalan",
+             "ch": "Chamorro",
+             "ce": "Tchétchène",
+             "zh": "Chinois",
+             "cu": "Slavon d'église",
+             "cv": "Tchouvache",
+             "kw": "Cornique",
+             "co": "Corse",
+             "cr": "Cree",
+             "cs": "Tchèque",
+             "da": "Danois",
+             "dv": "Maldivien",
+             "nl": "Néerlandais",
+             "dz": "Dzongkha",
+             "en": "Anglais",
+             "eo": "Espéranto",
+             "et": "Estonien",
+             "ee": "Éwé",
+             "fo": "Féroïen",
+             "fj": "Fidjien",
+             "fi": "Finnois",
+             "fr": "Français",
+             "fy": "Frison occidental",
+             "ff": "Peul",
+             "ka": "Géorgien",
+             "de": "Allemand",
+             "gd": "Gaélique",
+             "ga": "Irlandais",
+             "gl": "Galicien",
+             "gv": "Mannois",
+             "el": "Grec",
+             "gn": "Guarani",
+             "gu": "Goudjrati",
+             "ht": "Créole haïtien",
+             "ha": "Haoussa",
+             "he": "Hébreu",
+             "hz": "Herero",
+             "hi": "Hindi",
+             "ho": "Hiri Motu",
+             "hr": "Croate",
+             "hu": "Hongrois",
+             "ig": "Igbo",
+             "is": "Islandais",
+             "io": "Ido",
+             "ii": "Yi de Sichuan",
+             "iu": "Inuktitut",
+             "ie": "Interlingue",
+             "ia": "Interlingua (Langue auxiliaire internationale)",
+             "id": "Indonésien",
+             "ik": "Inupiaq",
+             "it": "Italien",
+             "jv": "Javanais",
+             "ja": "Japonais",
+             "kl": "Groenlandais",
+             "kn": "Kannada",
+             "ks": "Kashmiri",
+             "kr": "Kanouri",
+             "kk": "Kazakh",
+             "km": "Khmer central",
+             "ki": "Kikuyu",
+             "rw": "Rwanda",
+             "ky": "Kirghiz",
+             "kv": "Kom",
+             "kg": "Kongo",
+             "ko": "Coréen",
+             "kj": "Kuanyama",
+             "ku": "Kurde",
+             "lo": "Lao",
+             "la": "Latin",
+             "lv": "Letton",
+             "li": "Limbourgeois",
+             "ln": "Lingala",
+             "lt": "Lituanien",
+             "lb": "Luxembourgeois",
+             "lu": "Luba-Katanga",
+             "lg": "Ganda",
+             "mk": "Macédonien",
+             "mh": "Marshall",
+             "ml": "Malayalam",
+             "mi": "Maori",
+             "mr": "Marathe",
+             "ms": "Malais",
+             "mg": "Malgache",
+             "mt": "Maltais",
+             "mn": "Mongol",
+             "na": "Nauruan",
+             "nv": "Navaho",
+             "nr": "Ndébélé du sud",
+             "nd": "Ndébélé du nord",
+             "ng": "Ndonga",
+             "ne": "Népalais",
+             "nn": "Norvégien Nynorsk",
+             "nb": "Norvégien Bokmål",
+             "no": "Norvégien",
+             "ny": "Chichewa",
+             "oc": "Occitan",
+             "oj": "Ojibwa",
+             "or": "Oriya",
+             "om": "Galla",
+             "os": "Ossète",
+             "pa": "Pendjabi",
+             "fa": "Persan",
+             "pi": "Pali",
+             "pl": "Polonais",
+             "pt": "Portugais",
+             "ps": "Pachto",
+             "qu": "Quechua",
+             "rm": "Romanche",
+             "ro": "Roumain",
+             "rn": "Rundi",
+             "ru": "Russe",
+             "sg": "Sango",
+             "sa": "Sanskrit",
+             "si": "Singhalais",
+             "sk": "Slovaque",
+             "sl": "Slovène",
+             "se": "Sami du nord",
+             "sm": "Samoan",
+             "sn": "Shona",
+             "sd": "Sindhi",
+             "so": "Somali",
+             "st": "Sotho du sud",
+             "es": "Espagnol",
+             "sc": "Sarde",
+             "sr": "Serbe",
+             "ss": "Swati",
+             "su": "Soundanais",
+             "sw": "Swahili",
+             "sv": "Suédois",
+             "ty": "Tahitien",
+             "ta": "Tamoul",
+             "tt": "Tatar",
+             "te": "Télougou",
+             "tg": "Tadjik",
+             "tl": "Tagalog",
+             "th": "Thaï",
+             "bo": "Tibétain",
+             "ti": "Tigrigna",
+             "to": "Tongan",
+             "tn": "Tswana",
+             "ts": "Tsonga",
+             "tk": "Turkmène",
+             "tr": "Turc",
+             "tw": "Twi",
+             "ug": "Ouïgour",
+             "uk": "Ukrainien",
+             "ur": "Ourdou",
+             "uz": "Ouszbek",
+             "ve": "Venda",
+             "vi": "Vietnamien",
+             "vo": "Volapük",
+             "cy": "Gallois",
+             "wa": "Wallon",
+             "wo": "Wolof",
+             "xh": "Xhosa",
+             "yi": "Yiddish",
+             "yo": "Yoruba",
+             "za": "Zhuang",
+             "zu": "Zoulou"}
+
+
+def getLanguage(lang):
+    if not lang:
+        return "<Langue inconnue>"
+    if lang in languages:
+        return languages[lang]
+    return lang
 
 
 def getThemedBox():
@@ -37,10 +230,12 @@ def checkArch(f):
     if os.path.splitext(f)[1].lower() in [".zip", ".rar", ".7z"]:
         msg = getThemedBox()
         msg.setIcon(QMessageBox.Critical)
-        msg.setText("<h2>Attention !</h2><p>Les <b>fichiers archives</b> sont <b><font color='red'>interdits</font></b>.")
+        msg.setText(
+            "<h2>Attention !</h2><p>Les <b>fichiers archives</b> sont <b><font color='red'>interdits</font></b>.</p>")
         msg.exec_()
         return True
     return False
+
 
 def round1or0(n):
     g = "%.1f" % n
@@ -82,9 +277,9 @@ def sztxt(p):
 consoles = OrderedDict([
     ("Microsoft", ["Xbox", "Xbox 360", "Xbox One"]),
     ("Nintendo", ["3DS", "DS", "GameCube", "Wii", "Wii U"]),
-    ("Sony", ["PlayStation", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation Portable", "PlayStation Vita"])
+    ("Sony",
+     ["PlayStation", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation Portable", "PlayStation Vita"])
 ])
-
 
 consoles_retro = OrderedDict([
     ("Amstrad", ["CPC", "GX-5000", "PCX"]),
@@ -276,6 +471,7 @@ audiofdata = {}
 videofnames = []
 videofdata = {}
 
+
 def audioRemoveRows():
     for r in ui.audio_files.selectionModel().selectedRows():
         audiofnames.remove(audiofdata[r.row()]['file'])
@@ -342,6 +538,7 @@ def saveWindowState():
         ws_save['pos'] = window.pos()
         ws_save['size'] = window.size()
 
+
 def restoreWindowState():
     global ws_save
     window.restoreState(ws_save['state'])
@@ -354,7 +551,6 @@ def restoreWindowState():
         window.move(ws_save['pos'])
         window.resize(ws_save['size'])
     ws_save = {}
-    
 
 
 def initUi():
@@ -369,8 +565,8 @@ def initUi():
         window.restoreGeometry(geom)
     window.show()
     if isFullScreen: window.setWindowState(Qt.WindowMaximized)
-    #window.move(QApplication.desktop().screen().rect().center() - window.rect().center())
-    #window.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, window.size(), QApplication.desktop().availableGeometry()))
+    # window.move(QApplication.desktop().screen().rect().center() - window.rect().center())
+    # window.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, window.size(), QApplication.desktop().availableGeometry()))
     ui.con_type.addItems(consoles.keys())
     ui.con_type.setCurrentIndex(-1)
     ui.retro_type.addItems(consoles_retro.keys())
@@ -424,9 +620,6 @@ def initUi():
     ui.label.setText("t411 NFO Builder " + __version__)
 
 
-
-
-
 def goto(id, name=""):
     if id == -1:
         msg = getThemedBox()
@@ -458,13 +651,24 @@ def path_leaf(path):
     return os.path.splitext(os.path.basename(path))[0]
 
 
-def durationToText(dur):
-    return repr(dur // 60) + ":" + repr(dur % 60).zfill(2)
+def durationToText(dur, sec=True):
+    hours, rem = divmod(dur, 3600)
+    minutes, seconds = divmod(rem, 60)
+    sec = repr(seconds) + "s" if seconds != 0 and sec else ""
+    min = "" if minutes == 0 else repr(minutes) + "mn"
+    h = "" if hours == 0 else repr(hours) + "h"
+    return " ".join(a for a in [h, min, sec] if a)
+    # return repr(dur // 60) + ":" + repr(dur % 60).zfill(2)
 
 
 def textToDuration(dur):
-    spl = dur.split(":")
-    return int(spl[0]) * 60 + int(spl[1])
+    h = re.search("([\d]+)*h", dur)
+    min = re.search("([\d]+)*mn", dur)
+    sec = re.search("([\d]+)*s", dur)
+    return (int(h.group(1)) * 3600 if h else 0) + (int(min.group(1)) * 60 if min else 0) + (
+        int(sec.group(1)) if sec else 0)
+    # spl = dur.split(":")
+    # return int(spl[0]) * 60 + int(spl[1])
 
 
 def average(arr, emp=-1):
@@ -511,14 +715,14 @@ def video_addFiles():
             msg = getThemedBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText(
-                "<h2>Attention !</h2><p>Les fichiers <b>.m4v</b> ne sont <b><font color=red>acceptés</font></b> que pour les catégories <b>iOS</b> et <b>PSP</b>.")
+                "<h2>Attention !</h2><p>Les fichiers <b>.m4v</b> ne sont <b><font color=red>acceptés</font></b> que pour les catégories <b>iOS</b> et <b>PSP</b>.</p>")
             msg.exec_()
             warnShown1 = True
         if os.path.splitext(file)[1].lower() == ".wmv" and not warnShown2:
             msg = getThemedBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText(
-                "<h2>Attention !</h2><p>Les fichiers <b>.wmv</b> ne sont <b><font color=red>acceptés</font></b> que pour le <b>porno</b>.")
+                "<h2>Attention !</h2><p>Les fichiers <b>.wmv</b> ne sont <b><font color=red>acceptés</font></b> que pour le <b>porno</b>.</p>")
             msg.exec_()
             warnShown2 = True
         if file in videofnames:
@@ -670,6 +874,7 @@ def audio_updateFiles():
 def video_updateFiles():
     dSum = 0
     sSum = 0
+    exts = []
 
     while ui.film_files.rowCount() > 0:
         ui.film_files.removeRow(0)  # Vider le tableau
@@ -682,58 +887,86 @@ def video_updateFiles():
     videofdata.clear()
     for file in videofnames:
         if (os.path.isfile(file)):
+            mediaInfo = MediaInfo.parse(file)
+            trackGeneral = mediaInfo.tracks[0]
+            tracksVideo = [t for t in mediaInfo.tracks if t.track_type == 'Video']
+            if not tracksVideo:
+                msg = getThemedBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText(
+                    "<h2>Attention !</h2><p>Aucune piste vidéo détectée. Fichier ignoré.</p>")
+                msg.exec_()
+                continue
+
+            trackVideo = tracksVideo[0]
+            tracksAudio = [t for t in mediaInfo.tracks if t.track_type == 'Audio']
+            tracksText = [t for t in mediaInfo.tracks if t.track_type == 'Text']
+
+            if trackVideo.width < 624 or trackVideo.height < 352:
+                msg = getThemedBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText(
+                    "<h2>Attention !</h2><p>La résolution minimale pour une vidéo est de <b>624x352</b> (ici : {0}x{1}).</p>".format(
+                        trackVideo.width, trackVideo.height))
+                msg.exec_()
+                continue
+
+            exts.append(os.path.splitext(file)[1])
             rowPos = ui.film_files.rowCount()
             ui.film_files.insertRow(rowPos)
             videofdata[rowPos] = {}
             videofdata[rowPos]['file'] = file
             ui.film_files.setItem(rowPos, 0, QTableWidgetItem(os.path.basename(file)))  # Nom du fichier
-            mediaInfo = MediaInfo.parse(file)
-            trackGeneral = mediaInfo.tracks[0]
-
+            ui.film_files.setItem(rowPos, 1,
+                                  ROTableItem("{0}x{1}".format(trackVideo.width, trackVideo.height)))  # Résolution
             duree = trackGeneral.duration / 1000
             dSum += duree
-            ui.audio_files.setItem(rowPos, 6, ROTableItem(durationToText(int(duree))))  # Durée
-
-    albums = set([ui.audio_files.item(r, 4).text() for r in range(0, ui.audio_files.rowCount())])
-    if len(albums) == 2 and "[Inconnu]" in albums:
-        other = [a for a in albums if a != "[Inconnu]"][0]
-        for r in range(0, ui.audio_files.rowCount()):
-            ui.audio_files.setItem(r, 4, QTableWidgetItem(other))
-    performers = set([ui.audio_files.item(r, 3).text() for r in range(0, ui.audio_files.rowCount())])
-    if len(albums) == 2 and "[Inconnu]" in albums:
-        other = [a for a in performers if a != "[Inconnu]"][0]
-        for r in range(0, ui.audio_files.rowCount()):
-            ui.audio_files.setItem(r, 3, QTableWidgetItem(other))
-
-    # Vérifier multi-bitrate
-    for al in albums:
-        abrates = [ui.audio_files.item(r, 7).text() for r in range(0, ui.audio_files.rowCount()) if
-                   ui.audio_files.item(r, 4).text() == al]
-        if len([b for b in abrates if b != abrates[0]]) > 0:
-            msg = getThemedBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText(
-                "<h2>Attention !</h2><p>Le <b>multi-bitrate</b> est <b><font color='red'>interdit</font></b> pour un même album (" + al + ").<br/>Exemple : mélange de 128 Kbps et de 256 Kbps</p>")
-            msg.exec_()
+            ui.film_files.setItem(rowPos, 2, ROTableItem(durationToText(int(duree), False)))  # Durée
+            sSum += trackGeneral.file_size
+            ui.film_files.setItem(rowPos, 3, ROTableItem(sizeof_fmt(trackGeneral.file_size)))  # Taille
+            ui.film_files.setItem(rowPos, 4, ROTableItem("{0} fps".format(trackVideo.frame_rate)))  # Framerate
+            ui.film_files.setItem(rowPos, 5, ROTableItem(sizeof_fmt(trackVideo.bit_rate, "bps",
+                                                                    1000) if trackVideo.bit_rate else "<Bitrate inconnu>"))  # Bitrate vidéo
+            videofdata[rowPos]['audio'] = \
+                [
+                    {'id': int(t.stream_identifier) + 1,
+                     'lang': getLanguage(t.language),
+                     'sampling': t.sampling_rate,
+                     'bitrate': t.bit_rate,
+                     'channels': t.channel_s,
+                     'format': t.format + (" (" + t.format_info + ")" if t.format_info else "")}
+                    for t in tracksAudio
+                    ]
+            videofdata[rowPos]['subtitles'] = \
+                [
+                    {'id': int(t.stream_identifier) + 1,
+                     'lang': getLanguage(t.language),
+                     'format': t.format,
+                     'title': t.title,
+                     'display': (t.title + " (" + getLanguage(t.language) + ")" if t.title and t.title != getLanguage(
+                         t.language) else getLanguage(t.language))}
+                    for t in tracksText
+                    ]
+            ui.film_files.setItem(rowPos, 6, ROTableItem(
+                str(len(tracksAudio)) if all(x.language == None for x in tracksAudio) else ", ".join(
+                    getLanguage(t.language) for t in tracksAudio)))  # Pistes audio
+            ui.film_files.setItem(rowPos, 7, ROTableItem("Aucune" if not tracksText else
+                                                         str(len(tracksText)) if all(
+                                                             x.language == None for x in tracksText) else ", ".join(
+                                                             t['display'] for t in
+                                                             videofdata[rowPos]['subtitles'])))  # Sous-titres
 
     # Vérifier multi-format
     if len([ext for ext in exts if ext != exts[0]]) > 0:
         msg = getThemedBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText(
-            "<h2>Attention !</h2><p>Le <b>multi-format</b> est <b><font color='red'>interdit</font></b>.<br/>Exemple : mélange de MP3 et de Flac dans un <b>même torrent</b></p>")
+            "<h2>Attention !</h2><p>Le <b>multi-format</b> est <b><font color='red'>interdit</font></b>.<br/>Exemple : mélange d'AVI et de MP4 dans un <b>même torrent</b></p>")
         msg.exec_()
 
-    ui.audio_files.sortByColumn(0, 0)
-    ui.audio_totalTime.setText(durationToText(int(dSum)))
+    ui.film_files.sortByColumn(0, 0)
+    ui.film_totalTime.setText(durationToText(int(dSum), False))
     ui.txt_totalSize.setText(sizeof_fmt(sSum))
-    if year is not None: ui.audio_year.setValue(int(year))
-    ui.audio_codec.setText(", ".join(set(codecs)))
-    ui.audio_channel.setText(chanTxt(chan))
-    ui.audio_encoder.setText(most_common(enc))
-    ui.audio_genre.setCurrentText(", ".join(set(genres)))
-    ui.audio_avrBitrate.setText(sizeof_fmt(average(brates), 'bps', 1000))
-    ui.audio_freq.setText(sizeof_fmt(most_common(freqs), 'Hz', 1000))
 
 
 def app_browse():
@@ -899,7 +1132,7 @@ def genNFO():
         for album in grouped:
             nfo += textwrap.fill(
                 album[0] + " [" + sizeof_fmt(average([float(audiofdata[r]['bitrate']) for r in album[1]]),
-                                             "bps", 1000) + "]", width=82, replace_whitespace=False) + "\n\n"
+                                             "bps", 1000) + "]", width=76, replace_whitespace=False) + "\n\n"
             lastNum = 0
             for rowID in album[1]:
                 tmp = ui.audio_files.item(rowID, 0).text()
@@ -907,14 +1140,14 @@ def genNFO():
                 h = (str(lastNum) + ". ").rjust(6)
                 v = ui.audio_files.item(rowID, 2).text()
                 curl = len(h)
-                rem = 92 - curl - 11
+                rem = 92 - curl - 15
 
                 spc = " " * curl
                 nfo += h
                 i = 0
                 j = 0
                 v = v.ljust(rem)
-                dur = ui.audio_files.item(rowID, 6).text().rjust(7)
+                dur = ui.audio_files.item(rowID, 6).text().rjust(11)
                 for c in v:
                     if c == "\n" or i == rem:
                         if j == 0:
@@ -950,18 +1183,83 @@ def genNFO():
             }
         )
     elif cur == 3:  # Vidéo
-        nfo += getFields(
-            {
-                "Format": ui.film_format.text()
-            }
-        )
+        nfo += getHeader("Infos vidéo")
+        nfo += getFields(OrderedDict([
+            ("Durée totale", ui.film_totalTime.text()),
+            ("Format", ui.film_format.currentText())
+        ]))
+
+        nfo += getHeader("Liste des fichiers")
+
+        for r in range(0, ui.film_files.rowCount()):
+            nfo += ui.film_files.item(r, 0).text() + "\n"
+            nfo += "  Durée : " + ui.film_files.item(r, 2).text() + "\n"
+            nfo += "  Taille : " + ui.film_files.item(r, 3).text() + "\n"
+
+            # Pistes audio
+            audio = videofdata[r]['audio']
+            nfo += "  Pistes audio :\n"
+            if audio:
+                for s in audio:
+                    h = (str(s['id']) + ". ").rjust(7)
+                    v = ", ".join(
+                        [s['lang'], sizeof_fmt(s['bitrate'], "bps", 1000) if s['bitrate'] else "Bitrate inconnu",
+                         sizeof_fmt(s['sampling'], "Hz", 1000), str(s['channels']) + " canaux", s['format']])
+                    curl = len(h)
+                    rem = 91 - curl
+
+                    spc = " " * curl
+                    nfo += h
+                    i = 0
+                    v = v.ljust(rem)
+                    for c in v:
+                        if c == "\n" or i == rem:
+                            nfo += "\n"
+                            nfo += spc
+                            if c != "\n": nfo += c
+                            i = -1
+                        else:
+                            nfo += c
+                        i += 1
+                    nfo += "\n"
+            else:
+                nfo += "    Aucune\n"
+
+            # Pistes sous-titres
+            sub = videofdata[r]['subtitles']
+            if sub:
+                nfo += "  Pistes sous-titres :\n"
+                for s in sub:
+                    h = (str(s['id']) + ". ").rjust(7)
+                    v = s['display'] + ", " + s['format']
+                    curl = len(h)
+                    rem = 91 - curl
+
+                    spc = " " * curl
+                    nfo += h
+                    i = 0
+                    v = v.ljust(rem)
+                    for c in v:
+                        if c == "\n" or i == rem:
+                            nfo += "\n"
+                            nfo += spc
+                            if c != "\n": nfo += c
+                            i = -1
+                        else:
+                            nfo += c
+                        i += 1
+                    nfo += "\n"
+
+            nfo += "\n"
+
+        nfo += "\n"
     elif cur == 4:  # Appli / Jeu
         nfo += getFields(
             {
                 "Nom": ui.app_nom.text(),
                 "Langue": ui.app_langue.currentText()
             }
-        , noNewLine=False)
+            , noNewLine=False)
         if ui.app_swCon.currentIndex() == 0:
             nfo += getFields(
                 {
@@ -1018,5 +1316,6 @@ window = myMainWindow()
 ui = Ui_MainWindow()
 initUi()
 uiInitialized = True
-#window.show()
-sys.exit(app.exec_())
+# window.show()
+exitCode = app.exec_()
+sys.exit(exitCode)

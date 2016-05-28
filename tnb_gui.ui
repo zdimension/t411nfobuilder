@@ -407,7 +407,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="pages">
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="pageAudio">
            <layout class="QVBoxLayout" name="verticalLayout">
@@ -5270,7 +5270,7 @@ QPushButton:pressed {
                  <enum>Qt::SolidLine</enum>
                 </property>
                 <property name="columnCount">
-                 <number>7</number>
+                 <number>8</number>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -5314,6 +5314,11 @@ QPushButton:pressed {
                 <column>
                  <property name="text">
                   <string>Pistes audio</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Pistes sous-titres</string>
                  </property>
                 </column>
                </widget>
