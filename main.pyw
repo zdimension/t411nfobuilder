@@ -19,7 +19,7 @@ def most_common(L):
     return counts.most_common(1)[0][0]
 
 
-__version__ = "0.6"
+__version__ = "0.7"
 uiInitialized = False
 
 ws_save = {}
@@ -904,9 +904,9 @@ def video_updateFiles():
 
             if trackVideo.width < 624 or trackVideo.height < 352:
                 msg = getThemedBox()
-                msg.setIcon(QMessageBox.Warning)
+                msg.setIcon(QMessageBox.Critical)
                 msg.setText(
-                    "<h2>Attention !</h2><p>La résolution minimale pour une vidéo est de <b>624x352</b> (ici : {0}x{1}).</p>".format(
+                    "<h2>Attention !</h2><p>La résolution minimale pour une vidéo est de <b>624x352</b> (ici : {0}x{1}). Fichier ignoré.</p>".format(
                         trackVideo.width, trackVideo.height))
                 msg.exec_()
                 continue
@@ -948,13 +948,17 @@ def video_updateFiles():
                     for t in tracksText
                     ]
             ui.film_files.setItem(rowPos, 6, ROTableItem(
-                str(len(tracksAudio)) if all(x.language == None for x in tracksAudio) else ", ".join(
+                str(len(tracksAudio)) + " (langue inconnue)" if all(
+                    x.language == None for x in tracksAudio) else ", ".join(
                     getLanguage(t.language) for t in tracksAudio)))  # Pistes audio
             ui.film_files.setItem(rowPos, 7, ROTableItem("Aucune" if not tracksText else
-                                                         str(len(tracksText)) if all(
+                                                         str(len(tracksText)) + " (langue inconnue)" if all(
                                                              x.language == None for x in tracksText) else ", ".join(
                                                              t['display'] for t in
                                                              videofdata[rowPos]['subtitles'])))  # Sous-titres
+            combo = QComboBox()
+            combo.addItems(["", "PAL", "NTSC"])
+            ui.film_files.setCellWidget(rowPos, 8, combo)
 
     # Vérifier multi-format
     if len([ext for ext in exts if ext != exts[0]]) > 0:
@@ -1073,7 +1077,6 @@ def validate():
 
     # Infos up
     required[ui.txt_relName] = "Nom du torrent"
-    required[ui.txt_totalSize] = "Taille totale"
 
     req = [("<li>&nbsp;&nbsp;" + v + "</li>") for (k, v) in required.items() if
            (fisEmpty(k) and k.isVisible() and k.isEnabled())]
@@ -1140,14 +1143,14 @@ def genNFO():
                 h = (str(lastNum) + ". ").rjust(6)
                 v = ui.audio_files.item(rowID, 2).text()
                 curl = len(h)
-                rem = 92 - curl - 15
+                rem = 92 - curl - 16
 
                 spc = " " * curl
                 nfo += h
                 i = 0
                 j = 0
                 v = v.ljust(rem)
-                dur = ui.audio_files.item(rowID, 6).text().rjust(11)
+                dur = ui.audio_files.item(rowID, 6).text().rjust(12)
                 for c in v:
                     if c == "\n" or i == rem:
                         if j == 0:
@@ -1185,20 +1188,59 @@ def genNFO():
     elif cur == 3:  # Vidéo
         nfo += getHeader("Infos vidéo")
         nfo += getFields(OrderedDict([
-            ("Durée totale", ui.film_totalTime.text()),
-            ("Format", ui.film_format.currentText())
+            ("Durée totale", ui.film_totalTime.text())
         ]))
 
         nfo += getHeader("Liste des fichiers")
 
-        for r in range(0, ui.film_files.rowCount()):
-            nfo += ui.film_files.item(r, 0).text() + "\n"
-            nfo += "  Durée : " + ui.film_files.item(r, 2).text() + "\n"
-            nfo += "  Taille : " + ui.film_files.item(r, 3).text() + "\n"
+        from collections import defaultdict
+        groups = defaultdict(list)
+        for k, v in [((ui.film_files.item(r, 1).text(),
+                       ui.film_files.item(r, 5).text(),
+                       ui.film_files.item(r, 6).text(),
+                       ui.film_files.item(r, 7).text(),
+                       ui.film_files.cellWidget(r, 8).currentText(),
+                       tuple([tuple(d.items()) for d in videofdata[r]['audio']]),
+                       tuple([tuple(d.items()) for d in videofdata[r]['subtitles']])), r) for r in
+                     range(0, ui.film_files.rowCount())]:
+            groups[k].append(v)
+
+        for k, v in groups.items():
+            '''if len(v) > 1:
+                msg = getThemedBox()
+                msg.setIcon(QMessageBox.Information)
+                msg.setText(
+                    "Les vidéos suivantes présentent des caractéristiques identiques et ont donc été regroupées :<ul>" + ''.join(
+                        ["<li>&nbsp;&nbsp;" + ui.film_files.item(r, 0).text() + "</li>" for r in v]) + "</ul>")
+                msg.exec_()'''
+            for r in v:
+                dur = "  [" + ui.film_files.item(r, 3).text() + "] [" + ui.film_files.item(r, 2).text() + "]"
+                rem = 91 - len(dur)
+                v = ui.film_files.item(r, 0).text().ljust(rem)
+                i = 0
+                j = 0
+                for c in v:
+                    if c == "\n" or i == rem:
+                        if j == 0:
+                            nfo += dur
+                        j = 1
+                        nfo += "\n"
+                        if c != "\n": nfo += c
+                        i = -1
+                    else:
+                        nfo += c
+                    i += 1
+                if j == 0:
+                    nfo += dur
+                nfo += "\n"
+            nfo += "  Résolution............: " + k[0] + "\n"
+            fmt = k[4]
+            if fmt:
+                nfo += "  Format................: " + fmt + "\n"
 
             # Pistes audio
-            audio = videofdata[r]['audio']
-            nfo += "  Pistes audio :\n"
+            audio = [dict(x) for x in k[5]]
+            nfo += "  Pistes audio..........:\n"
             if audio:
                 for s in audio:
                     h = (str(s['id']) + ". ").rjust(7)
@@ -1226,9 +1268,9 @@ def genNFO():
                 nfo += "    Aucune\n"
 
             # Pistes sous-titres
-            sub = videofdata[r]['subtitles']
+            sub = [dict(x) for x in k[6]]
             if sub:
-                nfo += "  Pistes sous-titres :\n"
+                nfo += "  Pistes sous-titres....:\n"
                 for s in sub:
                     h = (str(s['id']) + ". ").rjust(7)
                     v = s['display'] + ", " + s['format']

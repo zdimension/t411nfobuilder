@@ -5270,7 +5270,7 @@ QPushButton:pressed {
                  <enum>Qt::SolidLine</enum>
                 </property>
                 <property name="columnCount">
-                 <number>8</number>
+                 <number>9</number>
                 </property>
                 <attribute name="verticalHeaderVisible">
                  <bool>false</bool>
@@ -5319,6 +5319,11 @@ QPushButton:pressed {
                 <column>
                  <property name="text">
                   <string>Pistes sous-titres</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Format</string>
                  </property>
                 </column>
                </widget>
@@ -5463,8 +5468,8 @@ QPushButton:pressed {
                   <widget class="QLabel" name="label_44">
                    <property name="font">
                     <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
+                     <weight>50</weight>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="text">
@@ -5480,39 +5485,6 @@ QPushButton:pressed {
                    <property name="readOnly">
                     <bool>true</bool>
                    </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_43">
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Format :</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QComboBox" name="film_format">
-                   <property name="currentText">
-                    <string/>
-                   </property>
-                   <property name="currentIndex">
-                    <number>-1</number>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>PAL</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>NTSC</string>
-                    </property>
-                   </item>
                   </widget>
                  </item>
                 </layout>
@@ -6064,8 +6036,8 @@ smartphone)</string>
               <widget class="QLabel" name="label_14">
                <property name="font">
                 <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <weight>50</weight>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
